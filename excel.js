@@ -37,13 +37,6 @@ function getData(nameKeyword, callback) {
       var $ = cheerio.load(body);
       var $tables = $("#specs-list table");
       var wifi = $tables.eq(8).find(".nfo").text();
-      /*		if (wifi.indexOf( "No" ) != -1 ) {
-            callback();
-            return;
-            }
-            else 
-            wifi = "yes";
-       */
       //get today's date 
       var today = new Date();
       var dd = today.getDate();
@@ -86,6 +79,8 @@ function getData(nameKeyword, callback) {
       var announced = $tables.eq(1).find("td").eq(1).text(); 
       if (announced.indexOf( "Released" ) != -1 ) 
         announced = announced.substring(0, announced.indexOf("R")-1);
+      if (announced.indexOf( "official" ) != -1) {
+        announced = "";
       if (announced.indexOf( "Jan" ) != -1) {
         announced = announced.replace( "January", "01" ); }
       else if (announced.indexOf( "Feb") != -1) {
