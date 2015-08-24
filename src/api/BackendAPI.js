@@ -3,17 +3,13 @@ function asJson (res) {
 }
 
 export function manufactureList () {
-  // return fetch(
-  //   `https://api.github.com/repos/${ ownerRepoStr }`
-  // )
-  //   .then(asJson);
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
         data: [
-          "Aaa",
-          "baa",
-          "cdd",
+          "Apple",
+          "Samsung",
+          "Xiaomi",
         ],
       });
     }, 1500 * Math.random());
@@ -21,10 +17,6 @@ export function manufactureList () {
 }
 
 export function deviceList () {
-  // return fetch(
-  //   `https://api.github.com/repos/${ ownerRepoStr }`
-  // )
-  //   .then(asJson);
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
@@ -33,20 +25,6 @@ export function deviceList () {
           "iPhone 6s",
           "iPhone 6+",
         ],
-      });
-    }, 2000 * Math.random());
-  });
-}
-
-export function createDevice (deviceObj) {
-  // return fetch(
-  //   `https://api.github.com/repos/${ ownerRepoStr }`
-  // )
-  //   .then(asJson);
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: deviceObj,
       });
     }, 2000 * Math.random());
   });

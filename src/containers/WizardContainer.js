@@ -14,13 +14,21 @@ import {
 
 import {default as Stage0Container} from "./Stage0Container";
 import {default as Stage1Container} from "./Stage1Container";
+import {default as Stage2Container} from "./Stage2Container";
 
 require("normalize.css");
 
 const containerByStage = {
   0: Stage0Container,
   1: Stage1Container,
+  2: Stage2Container,
 };
+
+const COUNTRY_LIST = [
+  "Japan",
+  "France",
+  "Heaven",
+];
 
 export default class WizardContainer extends Component {
 
@@ -44,10 +52,10 @@ export default class WizardContainer extends Component {
 
   handleAddClicked = () => {
     this.setState({
-      stage: 1,
+      stage: 2,
     });
   }
-  
+
   render () {
     const Component = containerByStage[this.state.stage] || Stage0Container;
 
@@ -59,8 +67,9 @@ export default class WizardContainer extends Component {
         />
         <Component
           onDataLoaded={this.handleDataLoaded}
-          onAddClicked={this.handleAddAlicked}
+          onAddClicked={this.handleAddClicked}
           manufactures={this.state.manufatures}
+          countries={COUNTRY_LIST}
           devices={this.state.devices}
         />
       </div>
