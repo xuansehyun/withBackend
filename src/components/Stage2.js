@@ -84,66 +84,68 @@ export default class Stage2 extends Component {
     return (
       <div style = {rowContainerStyle}>
         <div style = {{...rowStyle, ...columnContainerStyle}}>
-        <SelectField
-          value={deviceObj.manufacture}
-          valueMember="text"
-          onChange={this.handleChange.bind(this, "manufacture")}
-          errorText={errors.manufacture}
-          hintText="Select A Manufacture"
-          menuItems={manufactureItems}
-        />
-        <FlatButton
-          label= "Add New"
-          onClick={this.props.onNewManufacture}
-        />
+          <SelectField
+            value={deviceObj.manufacture}
+            valueMember="text"
+            onChange={this.handleChange.bind(this, "manufacture")}
+            errorText={errors.manufacture}
+            hintText="Select A Manufacture"
+            menuItems={manufactureItems}
+          />
+          <FlatButton
+            label= "Add New"
+            onClick={this.props.onNewManufacture}
+          />
         </div>
+  
         <div style = {{...rowStyle, ...columnContainerStyle}}>
-        <SelectField
-          value={deviceObj.device}
-          valueMember="text"
-          onChange={this.handleChange.bind(this, "device")}
-          errorText={errors.device}
-          hintText="Select A Device"
-          menuItems={deviceItems}
-        />
-        <FlatButton
-          label= "Add New"
-          onClick={this.props.onNewDevice}
-        />
+          <SelectField
+            value={deviceObj.device}
+            valueMember="text"
+            onChange={this.handleChange.bind(this, "device")}
+            errorText={errors.device}
+            hintText="Select A Device"
+            menuItems={deviceItems}
+          />
+          <FlatButton
+            label= "Add New"
+            onClick={this.props.onNewDevice}
+          />
         </div>
+      
         <div style = {{...rowStyle, ...columnContainerStyle}}>
-        <TextField
-          value={deviceObj.macAddress}
-          onChange={this.handleChange.bind(this, "macAddress")}
-          errorText={errors.macAddress}
-          hintText="Please enter your MAC address"
-        />
-        <FlatButton
-          label= "Help"
-          onClick={this.props.onHelpWithMacAddress}
-        />
+          <TextField
+            value={deviceObj.macAddress}
+            onChange={this.handleChange.bind(this, "macAddress")}
+            errorText={errors.macAddress}
+            hintText="Please enter your MAC address"
+          />
+          <FlatButton
+            label= "Help"
+            onClick={this.props.onHelpWithMacAddress}
+          />
         </div>
 
         <div style = {rowStyle}>
-        <SelectField
-          value={deviceObj.country}
-          valueMember="text"
-          onChange={this.handleChange.bind(this, "country")}
-          errorText={errors.country}
-          hintText="Select Your Country"
-          menuItems={countryItems}
-        />
-        <FlatButton
-          label = ""
-        />
-        </div>
+          <SelectField
+            value={deviceObj.country}
+            valueMember="text"
+            onChange={this.handleChange.bind(this, "country")}
+            errorText={errors.country}
+            hintText="Select Your Country"
+            menuItems={countryItems}
+          />
+          <FlatButton
+            label = ""
+          />
+          </div>
       
         <div style = {rowStyle}>
-        <FlatButton
-          primary={true}
-          label="Submit"
-          onClick={this.handleSubmit}
-        />
+          <FlatButton
+            primary={true}
+            label="Submit"
+            onClick={this.handleSubmit}
+          />
         </div>
       </div>
     );

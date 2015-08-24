@@ -8,10 +8,15 @@ import {
   FlatButton,
 } from "material-ui";
 
+const rowContainerStyle = {
+  display: "flex",
+  "flex-flow": "column nowrap",
+};
+
 const rowStyle = {
   flex: "0 1 auto",
   "align-self": "center",
-}
+};
 
 export default class Stage1 extends Component {
  
@@ -21,13 +26,14 @@ export default class Stage1 extends Component {
   } 
   render () {
     return (
-      //align center not working right now
-      <div style = {rowStyle}>
-      <FlatButton
-       label="Add A New Device"
-       primary={true}
-       onClick={this.props.onAddClicked}
-      />
+      <div style = {rowContainerStyle}>
+        <div style = {rowStyle}>
+          <FlatButton
+            label="Add A New Device"
+            primary={true}
+            onClick={this.props.onAddClicked}
+          />
+        </div>
       </div>
     );
   }  
