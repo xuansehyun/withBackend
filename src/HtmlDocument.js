@@ -26,6 +26,7 @@ export default class HtmlDocument extends Component {
     return (
       <html>
         <head>
+          <link rel="shortcut icon" href="/favicon.png" type="image/png"/>
           <title>Locarise</title>
           <link href="//fonts.googleapis.com/css?family=Roboto:400,300,500"/>
           {this._render_link_to_stylesheet_(clientAssets)}

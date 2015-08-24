@@ -24,11 +24,14 @@ const containerByStage = {
   2: Stage2Container,
 };
 
-const COUNTRY_LIST = [
+const COUNTRY_LIST =
+  //"countries.js" ;
+[
+  
   "Japan",
   "France",
   "Heaven",
-];
+]; 
 
 export default class WizardContainer extends Component {
 
