@@ -56,6 +56,13 @@ export default class WizardContainer extends Component {
     });
   }
 
+  handleDeviceCreated = (deviceObjFromServer) => {
+    console.log("Created!", deviceObjFromServer);
+
+    this.setState({
+      stage: 1,
+    });
+  }  
   render () {
     const Component = containerByStage[this.state.stage] || Stage0Container;
 
@@ -68,7 +75,7 @@ export default class WizardContainer extends Component {
         <Component
           onDataLoaded={this.handleDataLoaded}
           onAddClicked={this.handleAddClicked}
-          manufactures={this.state.manufatures}
+          manufactures={this.state.manufactures}
           countries={COUNTRY_LIST}
           devices={this.state.devices}
         />

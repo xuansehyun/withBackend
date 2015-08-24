@@ -29,3 +29,13 @@ export function deviceList () {
     }, 2000 * Math.random());
   });
 }
+
+export function createDevice (deviceObj) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        data: deviceObj,
+      });
+    }, 2000* Math.random());
+  });
+}

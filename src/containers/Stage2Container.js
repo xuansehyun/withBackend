@@ -15,8 +15,8 @@ export default class Stage2Container extends Component {
   static propTypes = {
     manufactures: PropTypes.array.isRequired,
     devices: PropTypes.array.isRequired,
-    onSubmit: PropTypes.func.isRequired,
     countries: PropTypes.array.isRequired,
+    onDeviceCreated: PropTypes.func.isRequired,
   }
 
   static contextTypes = {
@@ -29,13 +29,31 @@ export default class Stage2Container extends Component {
   }
 
   validateAndSubmit = (deviceObj) => {
-    const {manufacture, device, macAdress, country} = deviceObj;
+    const {manufacture, device, macAddress, country} = deviceObj;
     // validation process
     const errors = {};
-    // length not match 12
-    // length 0
+    if (12 !== macAddress.length) {
+      errors.macAddress = "Length not matched!";
+    }
+  
+    this.setState({
+      errors,
+    });
+    //if no error detected, go on
+    if (0 === Object.keys(errors).length) {
+      this.createDeviceToServer(deviceObj);
+    }
   }
 
+  createDeviceToServer (deviceObj) { 
+    return createDevice(deviceObj).then((deviceObjFromServer) => {
+      this.props.onDeviceCreated(deviceObjFromServer);
+    }).catch((errorsFromServer) => {
+      this.setState({
+        errors: errorsFromServer,
+      });
+    });
+  }
 
   render () {
     return (
@@ -43,6 +61,7 @@ export default class Stage2Container extends Component {
         manufactures={this.props.manufactures}
         devices={this.props.devices}
         countries={this.props.countries}
+        onSubmit={this.validateAndSubmit}
         errors={this.state.errors}
       />
     );

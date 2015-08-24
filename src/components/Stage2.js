@@ -27,6 +27,7 @@ export default class Stage2 extends Component {
     manufactures: PropTypes.array.isRequired,
     devices: PropTypes.array.isRequired,
     countries: PropTypes.array.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
   }
 
@@ -43,8 +44,11 @@ export default class Stage2 extends Component {
       },
     });
   }
-
-
+ 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.onSubmit(this.state.deviceObj);
+  }
   render () {
     const manufactureItems = this.props.manufactures.map(it => ({text: it}));
     const deviceItems = this.props.devices.map(it => ({text: it}));
@@ -81,6 +85,11 @@ export default class Stage2 extends Component {
           onChange={this.handleChange.bind(this, "country")}
           errorText={errors.country}
           menuItems={countryItems}
+        />
+        <FlatButton
+          primary={true}
+          label="Submit"
+          onClick={this.handleSubmit}
         />
       </div>
     );
