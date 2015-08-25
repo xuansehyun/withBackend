@@ -5,7 +5,7 @@ import {
 } from "react";
 
 import {
-  FlatButton,
+  RaisedButton,
 } from "material-ui";
 
 const rowContainerStyle = {
@@ -28,7 +28,7 @@ export default class Stage1 extends Component {
     return (
       <div style = {rowContainerStyle}>
         <div style = {rowStyle}>
-          <FlatButton
+          <RaisedButton
             label="Add A New Device"
             primary={true}
             onClick={this.props.onAddClicked}

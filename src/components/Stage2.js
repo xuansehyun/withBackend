@@ -5,9 +5,11 @@ import {
 } from "react";
 
 import {
+  FontIcon,
   SelectField,
   TextField,
   FlatButton,
+  RaisedButton,
 } from "material-ui";
 
 const rowContainerStyle = {
@@ -92,8 +94,8 @@ export default class Stage2 extends Component {
             hintText="Select A Manufacture"
             menuItems={manufactureItems}
           />
-          <FlatButton
-            label= "Add New"
+          <RaisedButton
+            label= "Add New" secondary={true}
             onClick={this.props.onNewManufacture}
           />
         </div>
@@ -107,8 +109,8 @@ export default class Stage2 extends Component {
             hintText="Select A Device"
             menuItems={deviceItems}
           />
-          <FlatButton
-            label= "Add New"
+          <RaisedButton
+            label= "Add New" secondary={true}
             onClick={this.props.onNewDevice}
           />
         </div>
@@ -120,8 +122,8 @@ export default class Stage2 extends Component {
             errorText={errors.macAddress}
             hintText="Please enter your MAC address"
           />
-          <FlatButton
-            label= "Help"
+          <RaisedButton
+            label= "Help" secondary={true} 
             onClick={this.props.onHelpWithMacAddress}
           />
         </div>
@@ -141,11 +143,17 @@ export default class Stage2 extends Component {
           </div>
       
         <div style = {rowStyle}>
-          <FlatButton
+          <RaisedButton
             primary={true}
             label="Submit"
             onClick={this.handleSubmit}
           />
+        </div>
+          <div style={rowStyle}>
+          <FlatButton linkButton={true} href="http://localhost:8080" 
+            secondary={true} label="Back">
+            <FontIcon className="material-icons">home</FontIcon>
+          </FlatButton>
         </div>
       </div>
     );
