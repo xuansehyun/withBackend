@@ -149,10 +149,11 @@ export default class Stage2 extends Component {
             onClick={this.handleSubmit}
           />
         </div>
-          <div style={rowStyle}>
+
+        <div style = {rowStyle}>
           <FlatButton linkButton={true} href="http://localhost:8080" 
             secondary={true} label="Back">
-            <FontIcon className="material-icons">home</FontIcon>
+            <FontIcon style={columnContainerStyle} className="material-icons">home</FontIcon>
           </FlatButton>
         </div>
       </div>

@@ -72,8 +72,14 @@ export default class WizardContainer extends Component {
     return (
       <div id="react-root">
         <AppBar
-          title="(Locarise Logo)"
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
+          //title="(Locarise Logo)"
+          title = {
+            <img 
+              style={{height: "60px"}}
+              src={require("../images/logo_locarise_inline_retina.png")}
+            />
+          }
+          showMenuIconButton = {false}
         />
         <Component
           onDataLoaded={this.handleDataLoaded}

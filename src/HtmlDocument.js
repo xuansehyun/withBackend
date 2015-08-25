@@ -26,7 +26,7 @@ export default class HtmlDocument extends Component {
     return (
       <html>
         <head>
-          <link href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
           <link rel="shortcut icon" href="/favicon.png" type="image/png"/>
           <title>Locarise</title>
           <link href="//fonts.googleapis.com/css?family=Roboto:400,300,500"/>

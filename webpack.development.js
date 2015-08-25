@@ -41,6 +41,12 @@ var clientConfig = {
         }),
       },
       {
+        test: /\.png$/,
+        loaders: [
+          "url-loader?limit=8192",
+        ],
+      },
+      {
         test: /\.(otf|eot|svg|ttf|woff|woff2)(\?.+)?$/,
         loaders: [
           "url-loader?limit=8192",
@@ -102,6 +108,12 @@ var serverConfig = {
           "null-loader",
         ],
       },
+      {
+        test: /\.png$/,
+        loaders: [
+          "null-loader",
+        ],
+      }
     ],
   },
   plugins: [
