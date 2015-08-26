@@ -9,10 +9,10 @@
 var request = require("request");
 var cheerio = require("cheerio");
 var fs = require("fs");
-getAllBrand();
+getAllBrands();
 
 //get all brands on the website
-function getAllBrand() {
+function getAllBrands() {
 	request("http://www.gsmarena.com/makers.php3", function (error, res, body) {
 		if (!error && res.statusCode == 200) {
 			var $ = cheerio.load(body);
@@ -23,7 +23,6 @@ function getAllBrand() {
 				if(i % 2 == 0){
 					brands.push($(this).attr("href"));
 				}
-			
 			});
 			console.log(brands);
 			fs.writeFileSync("brands.txt", JSON.stringify(brands));
@@ -35,8 +34,7 @@ function getAllBrand() {
 				cap_first_letter = cap_first_letter.replace( "_", " ");
 				cap_first_letter = cap_first_letter.replace( "_", "");
 				console.log(cap_first_letter);
-				fs.appendFileSync( "brands.xls", cap_first_letter + "\n");
-				
+				fs.appendFileSync( "brandsList.xls", cap_first_letter + "\n");
 			};
 		}
 	});

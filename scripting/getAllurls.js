@@ -12,25 +12,25 @@ var fs = require("fs");
 var brands = JSON.parse(fs.readFileSync("brands.txt"));
 console.log("brands length:" + brands.length);
 fs.writeFileSync("urls.txt", JSON.stringify([]));
-go(brands, 0);
+writeAllUrls(brands, 0);
 
-//used for keeping track of the script process
-function go(brands, index){
+//used for keeping track of the script process, write urls into txt file
+function writeAllUrls(brands, index){
   if(index < brands.length){
-    getAllUrl(brands[index],function(urls){
+    getAllUrls(brands[index],function(urls){
         urls.push(brands[index]);
         console.log(urls);
         var allUrls = JSON.parse(fs.readFileSync("urls.txt"));
         allUrls = allUrls.concat(urls);
         fs.writeFileSync("urls.txt", JSON.stringify(allUrls));
         index ++;
-        go(brands, index);
+        writeAllUrls(brands, index);
         });
   }
 }
 
 //get all the urls of all the products
-function getAllUrl(brand, callback) {
+function getAllUrls(brand, callback) {
   request("http://www.gsmarena.com/" + brand, function (error, res, body) {
       if (!error && res.statusCode == 200) {
       var $ = cheerio.load(body);

@@ -12,26 +12,26 @@ var fs = require("fs");
 var urls = JSON.parse(fs.readFileSync("urls.txt"));
 console.log("urls length:" + urls.length);
 fs.writeFileSync("phones.txt", JSON.stringify([]));
-go(urls, 0);
+writeAllPhones(urls, 0);
 
-//递归调用
-function go(urls, index){
+//access urls for brands page and generate a txt file containing all phone names
+function writeAllPhones(urls, index){
 	if(index < urls.length){
-		getAllPhone(urls[index],function(phones){
+		getAllPhones(urls[index],function(phones){
 			console.log(phones);
 			var allPhones = JSON.parse(fs.readFileSync("phones.txt"));
 			allPhones = allPhones.concat(phones);
 			fs.writeFileSync("phones.txt", JSON.stringify(allPhones));
 			index ++;
-			go(urls, index);
+			writeAllPhones(urls, index);
 		});
 		
 	}
 
 }
 
-//获取所有手机
-function getAllPhone(brandUrl, callback) {
+//function for acessing a single phone page and return the url
+function getAllPhones(brandUrl, callback) {
 	request("http://www.gsmarena.com/" + brandUrl, function (error, res, body) {
 		if (!error && res.statusCode == 200) {
 			var $ = cheerio.load(body);
