@@ -10,11 +10,14 @@ import {
   TextField,
   FlatButton,
   RaisedButton,
+  Styles,
+  styles,
 } from "material-ui";
 
 const rowContainerStyle = {
   display: "flex",
   "flex-flow": "column nowrap",
+  "align-content": "center", 
 };
 
 const rowStyle = {
@@ -26,6 +29,7 @@ const rowStyle = {
 const columnContainerStyle = {
   display: "flex",
   "flex-flow": "row nowrap",
+  "align-content": "center",
 };
 
 const columnStyle = {
@@ -94,7 +98,7 @@ export default class Stage2 extends Component {
             hintText="Select A Manufacture"
             menuItems={manufactureItems}
           />
-          <RaisedButton
+          <FlatButton
             label= "Add New" secondary={true}
             onClick={this.props.onNewManufacture}
           />
@@ -109,7 +113,7 @@ export default class Stage2 extends Component {
             hintText="Select A Device"
             menuItems={deviceItems}
           />
-          <RaisedButton
+          <FlatButton
             label= "Add New" secondary={true}
             onClick={this.props.onNewDevice}
           />
@@ -122,8 +126,8 @@ export default class Stage2 extends Component {
             errorText={errors.macAddress}
             hintText="Please enter your MAC address"
           />
-          <RaisedButton
-            label= "Help" secondary={true} 
+          <FlatButton
+            label= "Help" secondary={true}  
             onClick={this.props.onHelpWithMacAddress}
           />
         </div>
@@ -141,8 +145,12 @@ export default class Stage2 extends Component {
             label = ""
           />
           </div>
-      
-        <div style = {rowStyle}>
+         
+        <div style = {{...rowStyle, ...columnContainerStyle}}>
+          <RaisedButton linkButton={true} href="http://localhost:8080"
+            secondary={true} >
+            <FontIcon className="material-icons">home</FontIcon>HOME
+          </RaisedButton>
           <RaisedButton
             primary={true}
             label="Submit"
@@ -150,12 +158,6 @@ export default class Stage2 extends Component {
           />
         </div>
 
-        <div style = {rowStyle}>
-          <FlatButton linkButton={true} href="http://localhost:8080" 
-            secondary={true} label="Back">
-            <FontIcon style={columnContainerStyle} className="material-icons">home</FontIcon>
-          </FlatButton>
-        </div>
       </div>
     );
   }
