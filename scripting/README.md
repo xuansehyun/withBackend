@@ -7,6 +7,7 @@ node getAllUrls.js
 node getPhones.js  
 node writeExcel.js  
 
+Two excel files will be generated in a seperate file
 # address-collector
 
 ##DESCRIPTION

@@ -34,7 +34,7 @@ function getAllBrands() {
 				cap_first_letter = cap_first_letter.replace( "_", " ");
 				cap_first_letter = cap_first_letter.replace( "_", "");
 				console.log(cap_first_letter);
-				fs.appendFileSync( "brandsList.xls", cap_first_letter + "\n");
+				fs.appendFileSync( "excel_results/brandsList.xls", cap_first_letter + "\n");
 			};
 		}
 	});

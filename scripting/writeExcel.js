@@ -144,7 +144,7 @@ function getData(nameKeyword, callback) {
     var row = name + "\t" +type + "\t" + manu + "\t" + technology + "\t" + announced + "\t" 
                + popularity + "\t" + hit + "\t" + today + "\t" + is_portable + "\n";
     //write in excel file 
-    fs.appendFileSync("Info.xls", row);
+    fs.appendFileSync("excel_results/Info.xls", row);
       callback();
     } else {
         console.log(error);
