@@ -16,25 +16,23 @@ import {
 
 const rowContainerStyle = {
   display: "flex",
-  "flex-flow": "column nowrap",
-  "align-content": "center", 
+  flexFlow: "column nowrap",
+  alignContent: "center", 
 };
 
 const rowStyle = {
   flex: "0 1 auto",
-  //-webkit-flex: "0 1 auto",
-  "align-self": "center",
+  alignSelf: "center",
 };
 
 const columnContainerStyle = {
   display: "flex",
-  "flex-flow": "row nowrap",
-  "align-content": "center",
+  flexFlow: "row nowrap",
+  alignContent: "center",
 };
 
 const columnStyle = {
   flex: "0 1 auto",
-  //-webkit-flex: "0 1 auto",
 };
 
 const submitInputStyle = {

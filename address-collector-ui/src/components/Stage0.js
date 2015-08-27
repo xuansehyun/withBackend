@@ -11,12 +11,12 @@ import {
 
 const rowContainerStyle = {
   display: "flex",
-  "flex-flow": "column nowrap",
+  flexFlow: "column nowrap",
 };
 
 const rowStyle = {
   flex: "0 1 auto",
-  "align-self": "center",
+  alignSelf: "center",
 };
 
 export default class Stage0 extends Component {
