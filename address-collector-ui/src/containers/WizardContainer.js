@@ -23,15 +23,14 @@ const containerByStage = {
   1: Stage1Container,
   2: Stage2Container,
 };
-
+var country_list = require( 'iso-3166-country-list');
 const COUNTRY_LIST =
-  //"countries.js" ;
-[
-  
+  country_list.names;
+/*[
   "Japan",
   "France",
   "Heaven",
-]; 
+];*/
 
 export default class WizardContainer extends Component {
 
