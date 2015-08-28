@@ -10,8 +10,6 @@ import {
   TextField,
   FlatButton,
   RaisedButton,
-  Styles,
-  styles,
 } from "material-ui";
 
 const rowContainerStyle = {
@@ -57,6 +55,7 @@ export default class Stage2 extends Component {
     onHelpWithMacAddress: PropTypes.func.isRequired,
     onNewDevice: PropTypes.func.isRequired,
     onNewManufacture: PropTypes.func.isRequired,
+    onHelpWithMacAddress: PropTypes.func.isRequired,
   }
 
   state = {

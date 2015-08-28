@@ -9,6 +9,9 @@ import {
 } from "../api/BackendAPI";
 
 import {default as Stage2} from "../components/Stage2";
+import {default as NewManufactureModalContainer} from "./NewManufactureModalContainer";
+import {default as NewDeviceModalContainer} from "./NewDeviceModalContainer";
+import {default as HelpModal} from "../components/HelpModal";
 
 export default class Stage2Container extends Component {
 
@@ -24,10 +27,31 @@ export default class Stage2Container extends Component {
   }
  
   state = {
+    
     errors: {
     },
+    ModalContainer: null,
+    manufacturesOverrode: null,
+    devicesOverrode: null,
   }
 
+  handleNewManufacture = () => {
+    this.setState({
+      ModalContainer: NewManufactureModalContainer,
+    });
+  }
+
+  handleNewDevice = () => {
+    this.setState({
+      ModalContainer: NewDeviceModalContainer,
+    });
+  }
+
+  handleHelpWithMacAddress = () => {
+    this.setState({
+      ModalContainer: HelpModal,
+    });
+  }
   validateAndSubmit = (deviceObj) => {
     const {manufacture, device, macAddress, country} = deviceObj;
     // validation process
@@ -55,14 +79,57 @@ export default class Stage2Container extends Component {
     });
   }
 
+  handleRequestClose = () => {
+    this.setState({
+      ModalContainer: null,
+    });
+  }
+
+  handleManufactureCreated = (newManufactureName) => {
+    this.setState({
+      deviceObj: {
+        ...this.state.deviceObj,
+        manufacture: newManufactureName,
+      },
+      ModalContainer: null,
+      manufacturesOverrode: [newManufactureName].concat(this.props.manufactures),
+    });
+  }
+
+  handleDeviceCreated = (newDeviceName) => {
+    this.setState({
+      deviceObj: {
+        ...this.state.deviceObj,
+        device: newDeviceName,
+      },
+      ModalContainer: null,
+      devicesOverrode: [newDeviceName].concat(this.props.devices),
+    });
+  }
+
   render () {
+     const {ModalContainer} = this.state;
+    let modal;
+    if (ModalContainer) {
+      modal = (
+        <ModalContainer
+          onRequestClose={this.handleRequestClose}
+          onManufactureCreated={this.handleManufactureCreated}
+          onDeviceCreated={this.handleDeviceCreated}
+        />
+      );
+    }
+
     return (
       <Stage2
-        manufactures={this.props.manufactures}
-        devices={this.props.devices}
+        manufactures={this.state.manufacturesOverrode || this.props.manufactures}
+        devices={this.state.devicesOverrode || this.props.devices}
         countries={this.props.countries}
         onSubmit={this.validateAndSubmit}
         errors={this.state.errors}
+        onNewManufacture={this.handleNewManufacture}
+        onNewDevice={this.handleNewDevice}
+        onHelpWithMacAddress={this.handleHelpWithMacAddress}
       />
     );
   }

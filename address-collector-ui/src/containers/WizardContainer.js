@@ -86,6 +86,7 @@ export default class WizardContainer extends Component {
           manufactures={this.state.manufactures}
           countries={COUNTRY_LIST}
           devices={this.state.devices}
+          onDeviceCreated={this.handleDeviceCreated}
         />
       </div>
     );

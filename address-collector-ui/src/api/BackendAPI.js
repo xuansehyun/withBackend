@@ -39,3 +39,24 @@ export function createDevice (deviceObj) {
     }, 2000* Math.random());
   });
 }
+
+export function createManufactureName (manufactureName) {
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        data: manufactureName,
+      });
+    }, 2000* Math.random());
+  });
+}
+export function createDeviceName (manufactureName) {
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        data: deviceName,
+      });
+    }, 2000* Math.random());
+  });
+}
