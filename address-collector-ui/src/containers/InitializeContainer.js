@@ -9,9 +9,9 @@ import {
   deviceList,
 } from "../api/BackendAPI";
 
-import {default as Stage0} from "../components/Stage0";
+import {default as InitializeStage} from "../components/InitializeStage";
 
-export default class Stage0Container extends Component {
+export default class InitializeContainer extends Component {
 
   static propTypes = {
     onDataLoaded: PropTypes.func.isRequired,
@@ -35,7 +35,7 @@ export default class Stage0Container extends Component {
 
   render () {
     return (
-      <Stage0 />
+      <InitializeStage />
     );
   }
 }

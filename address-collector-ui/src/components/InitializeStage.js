@@ -19,7 +19,7 @@ const rowStyle = {
   alignSelf: "center",
 };
 
-export default class Stage0 extends Component {
+export default class InitializeStage extends Component {
 
   render () {
     return (

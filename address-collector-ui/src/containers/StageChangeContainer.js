@@ -12,16 +12,16 @@ import {
   AppBar,
 } from "material-ui";
 
-import {default as Stage0Container} from "./Stage0Container";
-import {default as Stage1Container} from "./Stage1Container";
-import {default as Stage2Container} from "./Stage2Container";
+import {default as InitializeContainer} from "./InitializeContainer";
+import {default as MainPageContainer} from "./MainPageContainer";
+import {default as CollectDataStageContainer} from "./CollectDataStageContainer";
 
 require("normalize.css");
 
 const containerByStage = {
-  0: Stage0Container,
-  1: Stage1Container,
-  2: Stage2Container,
+  0: InitializeContainer,
+  1: MainPageContainer,
+  2: CollectDataStageContainer,
 };
 var country_list = require( 'iso-3166-country-list');
 const COUNTRY_LIST =
@@ -32,7 +32,7 @@ const COUNTRY_LIST =
   "Heaven",
 ];*/
 
-export default class WizardContainer extends Component {
+export default class StageChangeContainer extends Component {
 
   static contextTypes = {
     muiTheme: PropTypes.object,

@@ -4,9 +4,9 @@ import {
   PropTypes,
 } from "react";
 
-import {default as Stage1} from "../components/Stage1";
+import {default as MainPage} from "../components/MainPage";
 
-export default class Stage1Container extends Component {
+export default class MainPageContainer extends Component {
 
 //event for clicking 
   static propTypes = {
@@ -19,7 +19,7 @@ export default class Stage1Container extends Component {
 
   render () {
     return (
-      <Stage1
+      <MainPage
         onAddClicked={this.props.onAddClicked}
       />
     );

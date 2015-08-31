@@ -18,7 +18,7 @@ const rowStyle = {
   alignSelf: "center",
 };
 
-export default class Stage1 extends Component {
+export default class MainPage extends Component {
  
 //check for func 
   static propTypes = {

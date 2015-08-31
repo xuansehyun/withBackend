@@ -9,7 +9,7 @@ import {
 } from "material-ui";
 const {ThemeManager, Colors} = Styles;
 
-import {default as WizardContainer} from "./containers/WizardContainer";
+import {default as StageChangeContainer} from "./containers/StageChangeContainer";
 
 export default class Root extends Component {
 
@@ -43,7 +43,7 @@ export default class Root extends Component {
 
   render () {
     return (
-      <WizardContainer />
+      <StageChangeContainer />
     );
   }
 }

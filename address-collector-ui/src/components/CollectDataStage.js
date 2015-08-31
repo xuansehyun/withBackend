@@ -44,7 +44,7 @@ const submitInputStyle = {
   opacity: "0"
 };
 
-export default class Stage2 extends Component {
+export default class CollectDataStage extends Component {
 
   static propTypes = {
     manufactures: PropTypes.array.isRequired,

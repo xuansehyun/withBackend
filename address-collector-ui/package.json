@@ -1,5 +1,5 @@
 {
-  "name": "sehyun-job",
+  "name": "address-collector",
   "version": "1.0.0",
   "description": "GitHub repos cross compare references",
   "main": "index.js",
@@ -12,19 +12,14 @@
     "test": "npm run lint"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tomchentw/sehyun-job.git"
+    "theype": "git",
+    "url": "git@github.com:locarise/address-collector.git"
   },
   "author": {
-    "name": "tomchentw",
-    "email": "developer@tomchentw.com",
-    "url": "https://github.com/tomchentw"
+    "name": "Sean Zhong"
   },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tomchentw/sehyun-job/issues"
-  },
-  "homepage": "https://github.com/tomchentw/sehyun-job#readme",
+  "homepage": "git@github.com:locarise",
   "engines": {
     "node": "~0.12"
   },
@@ -36,8 +31,7 @@
     "babel-plugin-react-autoprefix": "^0.2.6",
     "css-loader": "^0.16.0",
     "eslint": "^1.2.0",
-    "eslint-plugin-react": "^3.2.3",
-    "extract-text-webpack-plugin": "^0.8.2",
+    "eslint-plugin-react": "^3.2.3",     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
     "isomorphic-react-plugin-factory": "^1.0.1",
     "normalize.css": "^3.0.3",

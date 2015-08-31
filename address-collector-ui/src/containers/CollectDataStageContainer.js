@@ -8,12 +8,12 @@ import {
   createDeviceObject,
 } from "../api/BackendAPI";
 
-import {default as Stage2} from "../components/Stage2";
+import {default as CollectDataStage} from "../components/CollectDataStage";
 import {default as NewManufactureModalContainer} from "./NewManufactureModalContainer";
 import {default as NewDeviceModalContainer} from "./NewDeviceModalContainer";
 import {default as HelpModal} from "../components/HelpModal";
 
-export default class Stage2Container extends Component {
+export default class CollectDataStageContainer extends Component {
 
   static propTypes = {
     manufactures: PropTypes.array.isRequired,
@@ -132,7 +132,7 @@ export default class Stage2Container extends Component {
 
     return (
       <div>
-      <Stage2
+      <CollectDataStage
         manufactures={this.state.manufacturesOverrode || this.props.manufactures}
         devices={this.state.devicesOverrode || this.props.devices}
         countries={this.props.countries}
