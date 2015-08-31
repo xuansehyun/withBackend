@@ -1,5 +1,5 @@
 import {
-  defualt as React,
+  default as React,
   Component,
   PropTypes,
 } from "react";

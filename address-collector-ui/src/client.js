@@ -5,7 +5,7 @@ import {
 } from "react";
 
 import {default as injectTapEventPlugin} from "react-tap-event-plugin";
-
+import {default as ReactModal} from "react-modal";
 import {default as Root} from "./Root";
 
 //Needed for onTouchTap
@@ -14,10 +14,11 @@ import {default as Root} from "./Root";
 //https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
 
-React.render((
-  <Root />
-),
-  document.getElementById("react-container")
-);
+const container = document.getElementById("react-container");
+
+ReactModal.setAppElement(container);
+ReactModal.injectCSS();
+
+React.render(<Root />, container);
 
 Debug.enable("ReactRootContainer");

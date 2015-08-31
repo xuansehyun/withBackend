@@ -30,7 +30,7 @@ export function deviceList () {
   });
 }
 
-export function createDevice (deviceObj) {
+export function createDeviceObject (deviceObj) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({

@@ -26,7 +26,18 @@ export default class Root extends Component {
   componentWillMount () {
     this.themeManager = new ThemeManager();
     this.themeManager.setPalette({
-      accent1Color: Colors.deepOrange500,
+      accent1Color: Colors.cyan500,
+      primary1Color: Colors.grey200,
+    });
+    this.themeManager.setComponentThemes({
+      flatButton: {
+        textColor: Colors.cyan500,
+        primaryTextColor: Colors.cyan500,
+        //color: Colors.grey900,
+      },
+      button: {
+        height: 40,
+      }
     });
   }
 

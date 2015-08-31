@@ -55,34 +55,24 @@ export default class Stage2 extends Component {
     onHelpWithMacAddress: PropTypes.func.isRequired,
     onNewDevice: PropTypes.func.isRequired,
     onNewManufacture: PropTypes.func.isRequired,
-    onHelpWithMacAddress: PropTypes.func.isRequired,
-  }
-
-  state = {
-    deviceObj: {
-    },
+    deviceObj: PropTypes.object.isRequired,
+    onDeviceKeyValueChange: PropTypes.func.isRequired,
   }
 
   handleChange = (key, e) => {
-    this.setState({
-      deviceObj: {
-        ...this.state.deviceObj,
-        [key]: e.target.value,
-      },
-    });
+    this.props.onDeviceKeyValueChange(key, e.target.value);
   }
- 
+
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit(this.state.deviceObj);
+    this.props.onSubmit();
   }
   render () {
     const manufactureItems = this.props.manufactures.map(it => ({text: it}));
     const deviceItems = this.props.devices.map(it => ({text: it}));
     const countryItems = this.props.countries.map(it => ({text: it}));
 
-    const {deviceObj} = this.state;
-    const {errors} = this.props;
+    const {deviceObj, errors} = this.props;
 
     return (
       <div style = {rowContainerStyle}>

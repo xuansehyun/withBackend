@@ -5,7 +5,7 @@ import {
 } from "react";
 
 import {
-  createDevice,
+  createDeviceObject,
 } from "../api/BackendAPI";
 
 import {default as Stage2} from "../components/Stage2";
@@ -27,12 +27,22 @@ export default class Stage2Container extends Component {
   }
  
   state = {
-    
+    deviceObj: {
+    },
     errors: {
     },
     ModalContainer: null,
     manufacturesOverrode: null,
     devicesOverrode: null,
+  }
+
+  handleDeviceKeyValueChange = (key, value) => {
+    this.setState({
+      deviceObj: {
+        ...this.state.deviceObj,
+        [key]: value,
+      },
+    });
   }
 
   handleNewManufacture = () => {
@@ -52,8 +62,8 @@ export default class Stage2Container extends Component {
       ModalContainer: HelpModal,
     });
   }
-  validateAndSubmit = (deviceObj) => {
-    const {manufacture, device, macAddress, country} = deviceObj;
+  validateAndSubmit = () => {
+    const {manufacture, device, macAddress, country} = this.state.deviceObj;
     // validation process
     const errors = {};
     if (12 !== macAddress.length) {
@@ -65,7 +75,7 @@ export default class Stage2Container extends Component {
     });
     //if no error detected, go on
     if (0 === Object.keys(errors).length) {
-      this.createDeviceToServer(deviceObj);
+      this.createDeviceToServer();
     }
   }
 
@@ -121,6 +131,7 @@ export default class Stage2Container extends Component {
     }
 
     return (
+      <div>
       <Stage2
         manufactures={this.state.manufacturesOverrode || this.props.manufactures}
         devices={this.state.devicesOverrode || this.props.devices}
@@ -130,7 +141,12 @@ export default class Stage2Container extends Component {
         onNewManufacture={this.handleNewManufacture}
         onNewDevice={this.handleNewDevice}
         onHelpWithMacAddress={this.handleHelpWithMacAddress}
+        onDeviceKeyValueChange={this.handleDeviceKeyValueChange}
+        deviceObj={this.state.deviceObj}
+
       />
+      {modal}
+      </div>
     );
   }
 }

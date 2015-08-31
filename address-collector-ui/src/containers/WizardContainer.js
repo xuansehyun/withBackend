@@ -80,6 +80,7 @@ export default class WizardContainer extends Component {
           }
           showMenuIconButton = {false}
         />
+        <div style={{ height: "20px"}} />
         <Component
           onDataLoaded={this.handleDataLoaded}
           onAddClicked={this.handleAddClicked}

@@ -55,6 +55,7 @@
     "material-ui": "^0.10.4",
     "node-libs-browser": "^0.5.2",
     "react": "^0.13.3",
+    "react-modal": "^0.3.0",
     "react-tap-event-plugin": "^0.1.7"
   }
 }
