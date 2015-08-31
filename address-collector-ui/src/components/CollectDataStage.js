@@ -6,6 +6,7 @@ import {
 
 import {
   FontIcon,
+  IconButton,
   SelectField,
   TextField,
   FlatButton,
@@ -85,10 +86,14 @@ export default class CollectDataStage extends Component {
             hintText="Select A Manufacture"
             menuItems={manufactureItems}
           />
-          <FlatButton
-            label= "Add New" secondary={true}
+          <IconButton
+            iconClassName="material-icons"
+            tooltipPosition="right"
+            tooltip="Add"
+            color = {"#7e7e7e"}
             onClick={this.props.onNewManufacture}
-          />
+            >add_circle
+          </IconButton>  
         </div>
   
         <div style = {{...rowStyle, ...columnContainerStyle}}>
@@ -100,10 +105,14 @@ export default class CollectDataStage extends Component {
             hintText="Select A Device"
             menuItems={deviceItems}
           />
-          <FlatButton
-            label= "Add New" secondary={true}
+          <IconButton
+            iconClassName="material-icons"
+            tooltipPosition="right"
+            tooltip="Add"
+            color = {"#7e7e7e"}
             onClick={this.props.onNewDevice}
-          />
+            >add_circle
+          </IconButton>  
         </div>
       
         <div style = {{...rowStyle, ...columnContainerStyle}}>
@@ -111,15 +120,19 @@ export default class CollectDataStage extends Component {
             value={deviceObj.macAddress}
             onChange={this.handleChange.bind(this, "macAddress")}
             errorText={errors.macAddress}
-            hintText="Please enter your MAC address"
+            hintText="MAC Address: AA:BB:CC:00:00:00"
           />
-          <FlatButton
-            label= "Help" secondary={true}  
+          <IconButton
+            iconClassName="material-icons"
+            tooltipPosition="right"
+            tooltip="Help"
+            color = {"#7e7e7e"}
             onClick={this.props.onHelpWithMacAddress}
-          />
+            >help
+          </IconButton>
         </div>
 
-        <div style = {rowStyle}>
+        <div style = {{...rowStyle, ...columnContainerStyle}}>
           <SelectField
             value={deviceObj.country}
             valueMember="text"
@@ -128,23 +141,44 @@ export default class CollectDataStage extends Component {
             hintText="Select Your Country"
             menuItems={countryItems}
           />
-          <FlatButton
-            label = ""
-          />
-          </div>
+          <IconButton 
+            style={{lineHeight: "36px"}}
+            iconClassName="material-icons"
+            tooltipPosition="right"
+            tooltip=""
+            >language
+          </IconButton>
+        </div>
          
-        <div style = {{...rowStyle, ...columnContainerStyle}}>
-          <RaisedButton linkButton={true} href="http://localhost:8080"
-            secondary={true} >
-            <FontIcon className="material-icons">home</FontIcon>HOME
+        <div style = {rowStyle}>
+          <RaisedButton 
+            linkButton={true} 
+            href="http://localhost:8080"
+            secondary={true} 
+            label="HOME"
+            labelStyle={{padding: "16px 8px"}}
+            textColor= "deepOrange500"
+          >
+            <FontIcon 
+              className="material-icons"
+              style={{float: "left", lineHeight: "36px"}}
+            >home
+            </FontIcon>
           </RaisedButton>
+          
           <RaisedButton
             primary={true}
             label="Submit"
+            labelStyle={{padding: "16px 8px"}}
             onClick={this.handleSubmit}
-          />
+          >
+            <FontIcon
+              className="material-icons"
+              style={{float: "left", lineHeight: "36px"}}
+            >check
+            </FontIcon>
+          </RaisedButton>
         </div>
-
       </div>
     );
   }

@@ -19,7 +19,7 @@ export default class HelpModal extends Component {
   render() {
     return (  
       <ReactModal
-        isOpen={ture}
+        isOpen={true}
         onRequestClose={this.props.onRequestClose}
       > 
         Some help text to find Mac address here
