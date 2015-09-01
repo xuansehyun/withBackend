@@ -15,6 +15,8 @@ import {default as HelpModal} from "../components/HelpModal";
 
 const MAC_ADDRESS_REGEXP = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/;
 
+const STORAGE_KEY = "myDeviceList";
+
 export default class CollectDataStageContainer extends Component {
 
   static propTypes = {
@@ -83,12 +85,22 @@ export default class CollectDataStageContainer extends Component {
     //if no error detected, go on
     if (0 === Object.keys(errors).length) {
       this.saveCountryToLocalStorage(country);
-      this.saveManufactureToLocalStorage(manufacture);
-      this.saveDeviceToLocalStorage(device);
-      this.saveMacAddressToLocalStorage(macAddress);
+      this.appendToLocalStorage();
       this.createDeviceToServer();
     }
   }
+
+  readFromLocalStorage () {
+    const stringifiedList = window.localStorage.getItem(STORAGE_KEY);
+    return stringifiedList ? JSON.parse(stringifiedList) : [];
+  }
+
+  appendToLocalStorage () {
+    const currentList = this.readFromLocalStorage();
+    currentList.push(this.state.deviceObj);
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(currentList));
+  }
+
   saveToStorage (item) {
     window.localStorage.setItem("key", JSON.stringify(item));
   }

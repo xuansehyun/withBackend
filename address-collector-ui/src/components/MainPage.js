@@ -18,6 +18,8 @@ const rowStyle = {
   alignSelf: "center",
 };
 
+//var ReactGridLayout = require( 'react-grid-layout');
+
 export default class MainPage extends Component {
  
 //check for func 
@@ -25,7 +27,11 @@ export default class MainPage extends Component {
     onAddClicked: PropTypes.func.isRequired,
   } 
   render () {
+    //var layout = getOrGenerateLayout();
     return (
+     // <ReactGridLayout className="layout" layout={layout}
+       // cols={12} rowHeight={30}>
+       // <div keys={1}>
       <div style = {rowContainerStyle}>
         <div style = {rowStyle}>
           <RaisedButton
@@ -35,6 +41,8 @@ export default class MainPage extends Component {
           />
         </div>
       </div>
+      //</div>
+      //</ReactGridLayout>
     );
   }  
 }
