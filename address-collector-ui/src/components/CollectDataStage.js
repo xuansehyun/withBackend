@@ -76,38 +76,38 @@ export default class CollectDataStage extends Component {
     onDeviceKeyValueChange: PropTypes.func.isRequired,
   }
 
-  state = {
+  /*state = {
     deviceObj: {
     },
-  } 
+  } */
  
   handleChange = (key, e) => {
-    this.props.onDeviceKeyValueChange(key, e.target.value);
     let value = e.target.value;
     if (key === "macAddress") {
       value = normalizeMacAddress( value);
       value = formatMacAddress(value);
-  }
+    }
+    this.props.onDeviceKeyValueChange(key, value);
 
-  this.setState({
+  /*this.setState({
     deviceObj: {
       ...this.state.deviceObj,
       [key]:value,
     },
-  });
+  }); */
   } 
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit(this.state.deviceObj);
+    this.props.onSubmit();
   }
   render () {
     const manufactureItems = this.props.manufactures.map(it => ({text: it}));
     const deviceItems = this.props.devices.map(it => ({text: it}));
     const countryItems = this.props.countries.map(it => ({text: it}));
 
-    const {deviceObj} = this.state;
-    const {errors} = this.props;
+    const {deviceObj,errors} = this.props;
+    //const {errors} = this.props;
 
     return (
       <div style = {rowContainerStyle}>
@@ -124,7 +124,7 @@ export default class CollectDataStage extends Component {
             iconClassName="material-icons"
             tooltipPosition="top-right"
             tooltip="Add"
-            color = {"#7e7e7e"}
+            iconStyle = {{color: "#7e7e7e"}}
             onClick={this.props.onNewManufacture}
             >add_circle
           </IconButton>  
@@ -143,7 +143,7 @@ export default class CollectDataStage extends Component {
             iconClassName="material-icons"
             tooltipPosition="top-right"
             tooltip="Add"
-            color = {"#7e7e7e"}
+            iconStyle = {{color: "#7e7e7e"}}
             onClick={this.props.onNewDevice}
             >add_circle
           </IconButton>  
@@ -160,6 +160,7 @@ export default class CollectDataStage extends Component {
             iconClassName="material-icons"
             tooltipPosition="top-right"
             tooltip="Help"
+            iconStyle = {{color: "#7e7e7e"}}
             color = {"#7e7e7e"}
             onClick={this.props.onHelpWithMacAddress}
             >help

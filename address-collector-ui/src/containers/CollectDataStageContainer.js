@@ -32,6 +32,7 @@ export default class CollectDataStageContainer extends Component {
   state = {
     deviceObj: {
       country: window.localStorage.getItem("country"),
+      manufacture: window.localStorage.getItem("manufacture"),
     },
     errors: {
     },
@@ -73,20 +74,41 @@ export default class CollectDataStageContainer extends Component {
     if (!MAC_ADDRESS_REGEXP.test(macAddress)) {
       errors.macAddress = "Incorrect Mac Address format!";
     }
-  
+ 
+    var value = [manufacture, device, macAddress, country];
+ 
     this.setState({
       errors,
     });
     //if no error detected, go on
     if (0 === Object.keys(errors).length) {
       this.saveCountryToLocalStorage(country);
+      this.saveManufactureToLocalStorage(manufacture);
+      this.saveDeviceToLocalStorage(device);
+      this.saveMacAddressToLocalStorage(macAddress);
       this.createDeviceToServer();
     }
+  }
+  saveToStorage (item) {
+    window.localStorage.setItem("key", JSON.stringify(item));
+  }
+
+  saveManufactureToLocalStorage (manufacture) {
+    window.localStorage.setItem("manufacture", manufacture);
+  }
+
+  saveDeviceToLocalStorage (device) {
+    window.localStorage.setItem("device", device);
+  }
+  
+  saveMacAddressToLocalStorage (macAddress) {
+    window.localStorage.setItem("macAddress", macAddress);
   }
 
   saveCountryToLocalStorage (country) {
     window.localStorage.setItem("country", country);
   }
+
   createDeviceToServer () { 
     return createDeviceObject(this.state.deviceObj).then((deviceObjFromServer) => {
       this.props.onDeviceCreated(deviceObjFromServer);
