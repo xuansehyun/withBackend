@@ -13,13 +13,14 @@ import {default as NewManufactureModalContainer} from "./NewManufactureModalCont
 import {default as NewDeviceModalContainer} from "./NewDeviceModalContainer";
 import {default as HelpModal} from "../components/HelpModal";
 
-const MAC_ADDRESS_REGEXP =  /^(([A-Fa-f0-9]{2}[:]){5}[A-Fa-f0-9]{2}[,]?)+$/;
+const MAC_ADDRESS_REGEXP = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/;
 
 export default class CollectDataStageContainer extends Component {
 
   static propTypes = {
-    manufactures: PropTypes.array.isRequired,
-    devices: PropTypes.array.isRequired,
+    //manufactures: PropTypes.array.isRequired,
+    //devices: PropTypes.array.isRequired,
+    brandDeviceList: PropTypes.array.isRequired,
     countries: PropTypes.array.isRequired,
     onDeviceCreated: PropTypes.func.isRequired,
   }
@@ -30,12 +31,13 @@ export default class CollectDataStageContainer extends Component {
  
   state = {
     deviceObj: {
+      country: window.localStorage.getItem("country"),
     },
     errors: {
     },
     ModalContainer: null,
-    manufacturesOverrode: null,
-    devicesOverrode: null,
+    manufacturesOverrode: [],
+    devicesOverrode: [],
   }
 
   handleDeviceKeyValueChange = (key, value) => {
@@ -77,10 +79,14 @@ export default class CollectDataStageContainer extends Component {
     });
     //if no error detected, go on
     if (0 === Object.keys(errors).length) {
+      this.saveCountryToLocalStorage(country);
       this.createDeviceToServer();
     }
   }
 
+  saveCountryToLocalStorage (country) {
+    window.localStorage.setItem("country", country);
+  }
   createDeviceToServer () { 
     return createDeviceObject(this.state.deviceObj).then((deviceObjFromServer) => {
       this.props.onDeviceCreated(deviceObjFromServer);
@@ -104,7 +110,7 @@ export default class CollectDataStageContainer extends Component {
         manufacture: newManufactureName,
       },
       ModalContainer: null,
-      manufacturesOverrode: [newManufactureName].concat(this.props.manufactures),
+      manufacturesOverrode: [newManufactureName],
     });
   }
 
@@ -115,7 +121,7 @@ export default class CollectDataStageContainer extends Component {
         device: newDeviceName,
       },
       ModalContainer: null,
-      devicesOverrode: [newDeviceName].concat(this.props.devices),
+      devicesOverrode: [newDeviceName],
     });
   }
 
@@ -132,11 +138,18 @@ export default class CollectDataStageContainer extends Component {
       );
     }
 
+    const {brandDeviceList} = this.props;
+    
+    const manufactures = brandDeviceList.map(({brand}) => brand);
+    const selectedBrand = brandDeviceList
+      .filter(({brand}) => brand === this.state.deviceObj.manufacture) [0];
+    const devices = selectedBrand ? selectedBrand.devices : [];
+
     return (
       <div>
       <CollectDataStage
-        manufactures={this.state.manufacturesOverrode || this.props.manufactures}
-        devices={this.state.devicesOverrode || this.props.devices}
+        manufactures={this.state.manufacturesOverrode.concat(manufactures)}
+        devices={this.state.devicesOverrode.concat(devices)}
         countries={this.props.countries}
         onSubmit={this.validateAndSubmit}
         errors={this.state.errors}

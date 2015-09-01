@@ -2,7 +2,7 @@ function asJson (res) {
   return res.json();
 }
 
-export function manufactureList () {
+/*export function manufactureList () {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
@@ -14,19 +14,17 @@ export function manufactureList () {
       });
     }, 1500 * Math.random());
   });
-}
+} */
 
-export function deviceList () {
+const brandDevice = require("../data/brandDevice.json");
+
+export function brandDeviceList () {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
-        data: [
-          "iPhone 6",
-          "iPhone 6s",
-          "iPhone 6+",
-        ],
+        data: brandDevice,
       });
-    }, 2000 * Math.random());
+    }, 1500 * Math.random());
   });
 }
 

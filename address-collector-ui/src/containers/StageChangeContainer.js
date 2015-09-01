@@ -26,11 +26,6 @@ const containerByStage = {
 var country_list = require( 'iso-3166-country-list');
 const COUNTRY_LIST =
   country_list.names;
-/*[
-  "Japan",
-  "France",
-  "Heaven",
-];*/
 
 export default class StageChangeContainer extends Component {
 
@@ -40,15 +35,15 @@ export default class StageChangeContainer extends Component {
 
   state = {
     stage: 0,
-    manufactures: null,
-    devices: null,
+    /*manufactures: null,
+    devices: null,*/
+    brandDeviceList: null,
   }
  
-  handleDataLoaded = ( {manufactures, devices}) => {
+  handleDataLoaded = (brandDeviceList) => {
     this.setState({
         stage: 1, 
-        manufactures,
-        devices,
+        brandDeviceList,
     });
   }
 
@@ -84,9 +79,10 @@ export default class StageChangeContainer extends Component {
         <Component
           onDataLoaded={this.handleDataLoaded}
           onAddClicked={this.handleAddClicked}
-          manufactures={this.state.manufactures}
+          //manufactures={this.state.manufactures}
           countries={COUNTRY_LIST}
-          devices={this.state.devices}
+          //devices={this.state.devices}
+          brandDeviceList={this.state.brandDeviceList}
           onDeviceCreated={this.handleDeviceCreated}
         />
       </div>

@@ -31,6 +31,10 @@ var clientConfig = {
         loader: "babel-loader",
       },
       {
+        test: /\.json$/,
+        loader: "json-loader",
+      },
+      {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract("style-loader", "css-loader", {
           publicPath: "",
@@ -97,6 +101,10 @@ var serverConfig = {
         test: /\.js(x?)$/,
         exclude: /node_modules/,
         loader: "babel-loader",
+      },
+      {
+        test: /\.json$/,
+        loader: "json-loader",
       },
       {
         test: /\.css$/,

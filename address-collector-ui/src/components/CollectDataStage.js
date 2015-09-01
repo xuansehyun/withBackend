@@ -27,7 +27,6 @@ const rowStyle = {
 const columnContainerStyle = {
   display: "flex",
   flexFlow: "row nowrap",
-  //alignContent: "center",
   alignItems: "center",
 };
 
@@ -80,9 +79,10 @@ export default class CollectDataStage extends Component {
   state = {
     deviceObj: {
     },
-  }
-
+  } 
+ 
   handleChange = (key, e) => {
+    this.props.onDeviceKeyValueChange(key, e.target.value);
     let value = e.target.value;
     if (key === "macAddress") {
       value = normalizeMacAddress( value);
@@ -95,11 +95,11 @@ export default class CollectDataStage extends Component {
       [key]:value,
     },
   });
-  }
+  } 
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit();
+    this.props.onSubmit(this.state.deviceObj);
   }
   render () {
     const manufactureItems = this.props.manufactures.map(it => ({text: it}));
