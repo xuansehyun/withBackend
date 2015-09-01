@@ -66,7 +66,7 @@ export default class StageChangeContainer extends Component {
     });
   }  
   render () {
-    const Component = containerByStage[this.state.stage] || Stage0Container;
+    const Component = containerByStage[this.state.stage] || InitializeContainer;
 
     return (
       <div id="react-root">

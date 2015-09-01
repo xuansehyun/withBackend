@@ -13,6 +13,8 @@ import {default as NewManufactureModalContainer} from "./NewManufactureModalCont
 import {default as NewDeviceModalContainer} from "./NewDeviceModalContainer";
 import {default as HelpModal} from "../components/HelpModal";
 
+const MAC_ADDRESS_REGEXP =  /^(([A-Fa-f0-9]{2}[:]){5}[A-Fa-f0-9]{2}[,]?)+$/;
+
 export default class CollectDataStageContainer extends Component {
 
   static propTypes = {
@@ -66,8 +68,8 @@ export default class CollectDataStageContainer extends Component {
     const {manufacture, device, macAddress, country} = this.state.deviceObj;
     // validation process
     const errors = {};
-    if (12 !== macAddress.length) {
-      errors.macAddress = "Length not matched!";
+    if (!MAC_ADDRESS_REGEXP.test(macAddress)) {
+      errors.macAddress = "Incorrect Mac Address format!";
     }
   
     this.setState({
@@ -79,8 +81,8 @@ export default class CollectDataStageContainer extends Component {
     }
   }
 
-  createDeviceToServer (deviceObj) { 
-    return createDevice(deviceObj).then((deviceObjFromServer) => {
+  createDeviceToServer () { 
+    return createDeviceObject(this.state.deviceObj).then((deviceObjFromServer) => {
       this.props.onDeviceCreated(deviceObjFromServer);
     }).catch((errorsFromServer) => {
       this.setState({
@@ -143,7 +145,6 @@ export default class CollectDataStageContainer extends Component {
         onHelpWithMacAddress={this.handleHelpWithMacAddress}
         onDeviceKeyValueChange={this.handleDeviceKeyValueChange}
         deviceObj={this.state.deviceObj}
-
       />
       {modal}
       </div>

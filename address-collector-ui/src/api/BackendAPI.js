@@ -50,7 +50,7 @@ export function createManufactureName (manufactureName) {
     }, 2000* Math.random());
   });
 }
-export function createDeviceName (manufactureName) {
+export function createDeviceName (deviceName) {
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {

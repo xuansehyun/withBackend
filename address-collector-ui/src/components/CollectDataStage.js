@@ -27,7 +27,12 @@ const rowStyle = {
 const columnContainerStyle = {
   display: "flex",
   flexFlow: "row nowrap",
-  alignContent: "center",
+  //alignContent: "center",
+  alignItems: "center",
+};
+
+const buttonStyle = {
+  margin: "8px",
 };
 
 const columnStyle = {
@@ -45,6 +50,18 @@ const submitInputStyle = {
   opacity: "0"
 };
 
+function normalizeMacAddress (rawMacAddress) {
+  return rawMacAddress.replace(/[-:]/g, "");  
+}
+
+const MAC_ADDRESS_FORMATTED_SEPARATER = "-";
+  
+function formatMacAddress (macAddress) {
+  return macAddress 
+    .split(/(\S{2})/)
+    .filter(it => it)
+    .join(MAC_ADDRESS_FORMATTED_SEPARATER);
+}
 export default class CollectDataStage extends Component {
 
   static propTypes = {
@@ -60,8 +77,24 @@ export default class CollectDataStage extends Component {
     onDeviceKeyValueChange: PropTypes.func.isRequired,
   }
 
+  state = {
+    deviceObj: {
+    },
+  }
+
   handleChange = (key, e) => {
-    this.props.onDeviceKeyValueChange(key, e.target.value);
+    let value = e.target.value;
+    if (key === "macAddress") {
+      value = normalizeMacAddress( value);
+      value = formatMacAddress(value);
+  }
+
+  this.setState({
+    deviceObj: {
+      ...this.state.deviceObj,
+      [key]:value,
+    },
+  });
   }
 
   handleSubmit = (e) => {
@@ -73,7 +106,8 @@ export default class CollectDataStage extends Component {
     const deviceItems = this.props.devices.map(it => ({text: it}));
     const countryItems = this.props.countries.map(it => ({text: it}));
 
-    const {deviceObj, errors} = this.props;
+    const {deviceObj} = this.state;
+    const {errors} = this.props;
 
     return (
       <div style = {rowContainerStyle}>
@@ -88,7 +122,7 @@ export default class CollectDataStage extends Component {
           />
           <IconButton
             iconClassName="material-icons"
-            tooltipPosition="right"
+            tooltipPosition="top-right"
             tooltip="Add"
             color = {"#7e7e7e"}
             onClick={this.props.onNewManufacture}
@@ -107,7 +141,7 @@ export default class CollectDataStage extends Component {
           />
           <IconButton
             iconClassName="material-icons"
-            tooltipPosition="right"
+            tooltipPosition="top-right"
             tooltip="Add"
             color = {"#7e7e7e"}
             onClick={this.props.onNewDevice}
@@ -120,11 +154,11 @@ export default class CollectDataStage extends Component {
             value={deviceObj.macAddress}
             onChange={this.handleChange.bind(this, "macAddress")}
             errorText={errors.macAddress}
-            hintText="MAC Address: AA:BB:CC:00:00:00"
+            hintText="MAC Address: AA:BB:CC:11:22:33"
           />
           <IconButton
             iconClassName="material-icons"
-            tooltipPosition="right"
+            tooltipPosition="top-right"
             tooltip="Help"
             color = {"#7e7e7e"}
             onClick={this.props.onHelpWithMacAddress}
@@ -141,32 +175,29 @@ export default class CollectDataStage extends Component {
             hintText="Select Your Country"
             menuItems={countryItems}
           />
-          <IconButton 
-            style={{lineHeight: "36px"}}
-            iconClassName="material-icons"
-            tooltipPosition="right"
-            tooltip=""
-            >language
-          </IconButton>
+          <div style={{width: "48px", height: "48px"}} />
         </div>
          
-        <div style = {rowStyle}>
+        <div style = {{...rowStyle, ...columnContainerStyle}}>
           <RaisedButton 
+            style={{ ...columnStyle, ...buttonStyle}}
             linkButton={true} 
             href="http://localhost:8080"
             secondary={true} 
             label="HOME"
             labelStyle={{padding: "16px 8px"}}
-            textColor= "deepOrange500"
+            labelColor= {"#727272"}
           >
             <FontIcon 
               className="material-icons"
+              color={"#727272"}
               style={{float: "left", lineHeight: "36px"}}
             >home
             </FontIcon>
           </RaisedButton>
-          
+         
           <RaisedButton
+            style={{ ...columnStyle, ...buttonStyle}}
             primary={true}
             label="Submit"
             labelStyle={{padding: "16px 8px"}}
@@ -174,8 +205,9 @@ export default class CollectDataStage extends Component {
           >
             <FontIcon
               className="material-icons"
+              color={"#ffffff"}
               style={{float: "left", lineHeight: "36px"}}
-            >check
+            >check_circle
             </FontIcon>
           </RaisedButton>
         </div>

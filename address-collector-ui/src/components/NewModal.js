@@ -19,6 +19,10 @@ const rowContainerStyle = {
   alignContent: "center",
 };
 
+const columnStyle = {
+  flex: "0 1 auto",
+};
+
 const rowStyle = {
   flex: "0 1 auto",
   alignSelf: "center",
@@ -27,7 +31,11 @@ const rowStyle = {
 const columnContainerStyle = {
   display: "flex",
   flexFlow: "row nowrap",
-  alignContent: "center",
+  alignItems: "center",
+};
+
+const buttonStyle = {
+  margin: "8px",
 };
 
 export default class NewModal extends Component {
@@ -54,29 +62,21 @@ export default class NewModal extends Component {
         isOpen={true}
         onRequestClose={this.props.onRequestClose}
       >
-        <div style = {rowContainerStyle}>
+      <div style = {rowContainerStyle}>
         <div style = {{...rowStyle, ...columnContainerStyle}}>
         <TextField
           ref="text"
           hintText={this.props.hintText}
         />
-        <RaisedButton
-          primary={true}
-          label="Submit"
-          labelStyle={{padding: "16px 8px"}}
-          onClick={this.handleSubmit}
-        >
-          <FontIcon
-           className="material-icons"
-           color = {"#7e7e7e"}
-           style={{float: "left", lineHeight: "36px", maxWidth: "20px" }}
-          >check_circle
-          </FontIcon>
-        </RaisedButton>
+        </div>
+
+        <div style = {{...rowStyle, ...columnContainerStyle}}>
         
         <RaisedButton
+          style={{...columnStyle, ...buttonStyle}}
           secondary={true}
           label="Back"
+          labelColor= {"#727272"}
           onClick={this.props.onRequestClose}
         >
           <FontIcon
@@ -86,8 +86,24 @@ export default class NewModal extends Component {
           >arrow_back
           </FontIcon>
         </RaisedButton>
+ 
+        <RaisedButton
+          style={{...columnStyle, ...buttonStyle}}
+          primary={true}
+          label="Submit"
+          labelStyle={{padding: "16px 8px"}}
+          onClick={this.handleSubmit}
+        >
+          <FontIcon
+           className="material-icons"
+           color = {"#ffffff"}
+           style={{float: "left", lineHeight: "36px", maxWidth: "20px" }}
+          >check_circle
+          </FontIcon>
+        </RaisedButton>
+
         </div>
-        </div>
+      </div>
       </ReactModal>
     );
   }
