@@ -28,6 +28,19 @@ export function brandDeviceList () {
   });
 }
 
+export function StoreList () {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        data: [
+          "BC",
+          "LB",
+          "APPL",
+        ],
+      });
+    }, 2000* Math.random());
+    });
+}
 export function createDeviceObject (deviceObj) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {

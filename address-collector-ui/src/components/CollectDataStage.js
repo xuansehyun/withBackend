@@ -74,6 +74,7 @@ export default class CollectDataStage extends Component {
     onNewManufacture: PropTypes.func.isRequired,
     deviceObj: PropTypes.object.isRequired,
     onDeviceKeyValueChange: PropTypes.func.isRequired,
+    stores: PropTypes.array.isRequired,
   }
 
   /*state = {
@@ -105,7 +106,7 @@ export default class CollectDataStage extends Component {
     const manufactureItems = this.props.manufactures.map(it => ({text: it}));
     const deviceItems = this.props.devices.map(it => ({text: it}));
     const countryItems = this.props.countries.map(it => ({text: it}));
-
+    const storeItems = this.props.stores.map(it => ({text: it}));
     const {deviceObj,errors} = this.props;
     //const {errors} = this.props;
 
@@ -175,6 +176,18 @@ export default class CollectDataStage extends Component {
             errorText={errors.country}
             hintText="Select Your Country"
             menuItems={countryItems}
+          />
+          <div style={{width: "48px", height: "48px"}} />
+        </div>
+  
+        <div style = {{...rowStyle, ...columnContainerStyle}}>
+          <SelectField
+            value={deviceObj.store}
+            valueMember="text"
+            onChange={this.handleChange.bind(this, "store")}
+            errorText={errors.store}
+            hintText="Select Your Store"
+            menuItems={storeItems}
           />
           <div style={{width: "48px", height: "48px"}} />
         </div>

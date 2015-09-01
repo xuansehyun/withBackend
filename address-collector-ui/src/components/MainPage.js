@@ -18,6 +18,10 @@ const rowStyle = {
   alignSelf: "center",
 };
 
+const buttonStyle = {
+  margin: "10px",
+};
+
 //var ReactGridLayout = require( 'react-grid-layout');
 
 export default class MainPage extends Component {
@@ -25,6 +29,7 @@ export default class MainPage extends Component {
 //check for func 
   static propTypes = {
     onAddClicked: PropTypes.func.isRequired,
+    onShowData: PropTypes.func.isRequired,
   } 
   render () {
     //var layout = getOrGenerateLayout();
@@ -35,9 +40,15 @@ export default class MainPage extends Component {
       <div style = {rowContainerStyle}>
         <div style = {rowStyle}>
           <RaisedButton
+            style={buttonStyle}
             label="Add A New Device"
             primary={true}
             onClick={this.props.onAddClicked}
+          />
+          <RaisedButton
+            label="Show Data"
+            secondary={true}
+            onClick={this.props.onShowData}
           />
         </div>
       </div>

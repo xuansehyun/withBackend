@@ -22,6 +22,7 @@ export default class CollectDataStageContainer extends Component {
   static propTypes = {
     //manufactures: PropTypes.array.isRequired,
     //devices: PropTypes.array.isRequired,
+    stores: PropTypes.array.isRequired,
     brandDeviceList: PropTypes.array.isRequired,
     countries: PropTypes.array.isRequired,
     onDeviceCreated: PropTypes.func.isRequired,
@@ -70,7 +71,7 @@ export default class CollectDataStageContainer extends Component {
     });
   }
   validateAndSubmit = () => {
-    const {manufacture, device, macAddress, country} = this.state.deviceObj;
+    const {manufacture, device, macAddress, country, store} = this.state.deviceObj;
     // validation process
     const errors = {};
     if (!MAC_ADDRESS_REGEXP.test(macAddress)) {
@@ -85,6 +86,7 @@ export default class CollectDataStageContainer extends Component {
     //if no error detected, go on
     if (0 === Object.keys(errors).length) {
       this.saveCountryToLocalStorage(country);
+      this.saveManufactureToLocalStorage (manufacture);
       this.appendToLocalStorage();
       this.createDeviceToServer();
     }
@@ -101,20 +103,8 @@ export default class CollectDataStageContainer extends Component {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(currentList));
   }
 
-  saveToStorage (item) {
-    window.localStorage.setItem("key", JSON.stringify(item));
-  }
-
   saveManufactureToLocalStorage (manufacture) {
     window.localStorage.setItem("manufacture", manufacture);
-  }
-
-  saveDeviceToLocalStorage (device) {
-    window.localStorage.setItem("device", device);
-  }
-  
-  saveMacAddressToLocalStorage (macAddress) {
-    window.localStorage.setItem("macAddress", macAddress);
   }
 
   saveCountryToLocalStorage (country) {
@@ -182,6 +172,7 @@ export default class CollectDataStageContainer extends Component {
     return (
       <div>
       <CollectDataStage
+        stores={this.props.stores}
         manufactures={this.state.manufacturesOverrode.concat(manufactures)}
         devices={this.state.devicesOverrode.concat(devices)}
         countries={this.props.countries}

@@ -27,6 +27,11 @@ var country_list = require( 'iso-3166-country-list');
 const COUNTRY_LIST =
   country_list.names;
 
+const STORE_LIST = [
+  "BC",
+  "LB",
+  "AP",
+];
 export default class StageChangeContainer extends Component {
 
   static contextTypes = {
@@ -81,6 +86,7 @@ export default class StageChangeContainer extends Component {
           onAddClicked={this.handleAddClicked}
           //manufactures={this.state.manufactures}
           countries={COUNTRY_LIST}
+          stores={STORE_LIST}
           //devices={this.state.devices}
           brandDeviceList={this.state.brandDeviceList}
           onDeviceCreated={this.handleDeviceCreated}
