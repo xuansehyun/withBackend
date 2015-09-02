@@ -1,12 +1,25 @@
-# UI 
+## Development
 
+``
 git clone ...
 npm install
 npm start
-
+``
 
 Then open [http://localhost:8080](http://localhost:8080).
 (open http://127.0.0.1:8080 if the above doesnt show).
+
+## Deployment
+
+1. Install webpack:
+
+``npm install -g webpack``
+
+2. Build
+
+``npm run clean && NODE_ENV=production webpack -p --config webpack.production.js``
+
+3. Upload result in ``public`` folder
 
 ## TODOs
 

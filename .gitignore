@@ -44,3 +44,5 @@ public/tmp
 public/index.html
 public/*.gz
 tmp/*
+address-collector-ui/public
+address-collector-ui/tmp
