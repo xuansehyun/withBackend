@@ -26,6 +26,7 @@ export default class CollectDataStageContainer extends Component {
     brandDeviceList: PropTypes.array.isRequired,
     countries: PropTypes.array.isRequired,
     onDeviceCreated: PropTypes.func.isRequired,
+    onHome: PropTypes.func.isRequired,
   }
 
   static contextTypes = {
@@ -50,6 +51,16 @@ export default class CollectDataStageContainer extends Component {
         ...this.state.deviceObj,
         [key]: value,
       },
+    });
+  }
+
+  handleCheckAddress = (key, value) => {
+    const errors = {};
+    if (!MAC_ADDRESS_REGEXP.test(value)) {
+          errors.value = "Incorrect Mac Address format!";
+      }
+    this.setState({
+        errors,
     });
   }
 
@@ -183,6 +194,8 @@ export default class CollectDataStageContainer extends Component {
         onHelpWithMacAddress={this.handleHelpWithMacAddress}
         onDeviceKeyValueChange={this.handleDeviceKeyValueChange}
         deviceObj={this.state.deviceObj}
+        onCheckAddress={this.handleCheckAddress}
+        onHome={this.props.onHome}
       />
       {modal}
       </div>

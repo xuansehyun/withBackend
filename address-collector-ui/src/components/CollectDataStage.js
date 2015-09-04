@@ -53,6 +53,20 @@ function normalizeMacAddress (rawMacAddress) {
   return rawMacAddress.replace(/[-:]/g, "");  
 }
 
+const MAC_ADDRESS_REGEXP = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/;
+
+function checkMacAddress (macAddress) {
+  console.log("hi");
+    const errors = {};
+  console.log("hii");
+    if (!MAC_ADDRESS_REGEXP.test(macAddress)) {
+  console.log("hiii");
+        errors.macAddress = "Incorrect Mac Address format!";
+  console.log("hiiii");
+     }
+    return macAddress;
+ }
+
 const MAC_ADDRESS_FORMATTED_SEPARATER = "-";
   
 function formatMacAddress (macAddress) {
@@ -75,6 +89,8 @@ export default class CollectDataStage extends Component {
     deviceObj: PropTypes.object.isRequired,
     onDeviceKeyValueChange: PropTypes.func.isRequired,
     stores: PropTypes.array.isRequired,
+    onCheckAddress: PropTypes.func.isRequired,
+    onHome: PropTypes.func.isRequired,
   }
 
   /*state = {
@@ -89,19 +105,39 @@ export default class CollectDataStage extends Component {
       value = formatMacAddress(value);
     }
     this.props.onDeviceKeyValueChange(key, value);
+  }
+  handleKeyUp = (e) => {
+    //let value = e.target.value;
+    //if (key === "macAddress") {
+      //value = checkMacAddress(value);
+      e.preventDefault();
+      console.log("heyy");
+      this.props.onCheckAddress(key, value);
+    //}
+    console.log("heyyy");
+    //this.setState({
+    //  errors,
+    //});
+      //this.props.onDeviceKeyValueChange(key, value);
+    }
 
   /*this.setState({
     deviceObj: {
       ...this.state.deviceObj,
       [key]:value,
     },
-  }); */
-  } 
+  }); */ 
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.onSubmit();
   }
+
+  handleHome = (e) => {
+    e.preventDefault();
+    this.props.onHome();
+  }
+
   render () {
     const manufactureItems = this.props.manufactures.map(it => ({text: it}));
     const deviceItems = this.props.devices.map(it => ({text: it}));
@@ -116,6 +152,7 @@ export default class CollectDataStage extends Component {
           <SelectField
             value={deviceObj.manufacture}
             valueMember="text"
+            underlineFocusStyle={{borderColor: "#00afc4"}}
             onChange={this.handleChange.bind(this, "manufacture")}
             errorText={errors.manufacture}
             hintText="Select A Manufacture"
@@ -154,6 +191,7 @@ export default class CollectDataStage extends Component {
           <TextField
             value={deviceObj.macAddress}
             onChange={this.handleChange.bind(this, "macAddress")}
+            onKeyUp={this.handleKeyUp.bind(this, "macAddress")}
             errorText={errors.macAddress}
             hintText="MAC Address: AA:BB:CC:11:22:33"
           />
@@ -195,12 +233,11 @@ export default class CollectDataStage extends Component {
         <div style = {{...rowStyle, ...columnContainerStyle}}>
           <RaisedButton 
             style={{ ...columnStyle, ...buttonStyle}}
-            linkButton={true} 
-            href="http://localhost:8080"
             secondary={true} 
             label="HOME"
             labelStyle={{padding: "16px 8px"}}
             labelColor= {"#727272"}
+            onClick={this.props.onHome}
           >
             <FontIcon 
               className="material-icons"

@@ -6,6 +6,7 @@ import {
 
 import {
   RaisedButton,
+  FontIcon,
 } from "material-ui";
 
 const rowContainerStyle = {
@@ -13,9 +14,19 @@ const rowContainerStyle = {
   flexFlow: "column nowrap",
 };
 
+const columnContainerStyle = {
+  display: "flex",
+  flexFlow: "row nowrap",
+  alignItems: "center",
+};
+
 const rowStyle = {
   flex: "0 1 auto",
   alignSelf: "center",
+};
+
+const columnStyle = {
+  flex: "0 1 auto",
 };
 
 const buttonStyle = {
@@ -38,13 +49,21 @@ export default class MainPage extends Component {
        // cols={12} rowHeight={30}>
        // <div keys={1}>
       <div style = {rowContainerStyle}>
-        <div style = {rowStyle}>
+        <div style = {{...rowStyle, ...columnContainerStyle}}>  
           <RaisedButton
-            style={buttonStyle}
+            style={{ ...columnStyle, ...buttonStyle}}
             label="Add A New Device"
             primary={true}
             onClick={this.props.onAddClicked}
-          />
+          >
+            <FontIcon
+              className="material-icons"
+              color={"#ffffff"}
+              style={{float: "left", lineHeight: "36px"}}
+            >smartphone
+            </FontIcon>
+          </RaisedButton>
+        
           <RaisedButton
             label="Show Data"
             secondary={true}
