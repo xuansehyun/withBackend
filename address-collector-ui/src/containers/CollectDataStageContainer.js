@@ -57,8 +57,11 @@ export default class CollectDataStageContainer extends Component {
   handleCheckAddress = (key, value) => {
     const errors = {};
     if (!MAC_ADDRESS_REGEXP.test(value)) {
-          errors.value = "Incorrect Mac Address format!";
+          errors.macAddress = "Incorrect Mac Address format!";
       }
+    else {
+      errors.macAddress = "Valid Mac Address";
+    }
     this.setState({
         errors,
     });
@@ -88,7 +91,15 @@ export default class CollectDataStageContainer extends Component {
     if (!MAC_ADDRESS_REGEXP.test(macAddress)) {
       errors.macAddress = "Incorrect Mac Address format!";
     }
- 
+    if (!manufacture) {
+      errors.manufacture = "Please Select A Manufacture!";
+    }
+    if (!device) {
+      errors.device = "Please Select A Device!";
+    }
+    if (!country) {
+      errors.device = "Please Select A Country!";
+    }
     var value = [manufacture, device, macAddress, country];
  
     this.setState({
