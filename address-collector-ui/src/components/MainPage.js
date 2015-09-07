@@ -45,9 +45,9 @@ export default class MainPage extends Component {
   render () {
     //var layout = getOrGenerateLayout();
     return (
-     // <ReactGridLayout className="layout" layout={layout}
-       // cols={12} rowHeight={30}>
-       // <div keys={1}>
+      //<ReactGridLayout className="layout" 
+      //   cols={12} rowHeight={30}>
+      //  <div key={1} _grid={{x:4, y:6, w:5, h:6}}>
       <div style = {rowContainerStyle}>
         <div style = {{...rowStyle, ...columnContainerStyle}}>  
           <RaisedButton

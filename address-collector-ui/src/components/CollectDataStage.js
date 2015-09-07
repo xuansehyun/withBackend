@@ -55,7 +55,7 @@ function normalizeMacAddress (rawMacAddress) {
 
 const MAC_ADDRESS_REGEXP = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/;
 
-function checkMacAddress (macAddress) {
+/*function checkMacAddress (macAddress) {
   console.log("hi");
     const errors = {};
   console.log("hii");
@@ -63,9 +63,12 @@ function checkMacAddress (macAddress) {
   console.log("hiii");
         errors.macAddress = "Incorrect Mac Address format!";
   console.log("hiiii");
-     }
+    this.setState({
+      errors,
+    }); 
+    }
     return macAddress;
- }
+ } */
 
 const MAC_ADDRESS_FORMATTED_SEPARATER = "-";
   
@@ -93,11 +96,6 @@ export default class CollectDataStage extends Component {
     onHome: PropTypes.func.isRequired,
   }
 
-  /*state = {
-    deviceObj: {
-    },
-  } */
- 
   handleChange = (key, e) => {
     let value = e.target.value;
     if (key === "macAddress") {
@@ -106,27 +104,13 @@ export default class CollectDataStage extends Component {
     }
     this.props.onDeviceKeyValueChange(key, value);
   }
-  handleKeyUp = (e) => {
-    //let value = e.target.value;
-    //if (key === "macAddress") {
-      //value = checkMacAddress(value);
-      e.preventDefault();
-      console.log("heyy");
-      this.props.onCheckAddress(key, value);
-    //}
-    console.log("heyyy");
-    //this.setState({
-    //  errors,
-    //});
-      //this.props.onDeviceKeyValueChange(key, value);
-    }
 
-  /*this.setState({
-    deviceObj: {
-      ...this.state.deviceObj,
-      [key]:value,
-    },
-  }); */ 
+  handleKeyUp = (key, e) => {
+    let value = e.target.value;
+    if (key === "macAddress") {
+      this.props.onCheckAddress(key, value);
+    }
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -190,6 +174,8 @@ export default class CollectDataStage extends Component {
         <div style = {{...rowStyle, ...columnContainerStyle}}>
           <TextField
             value={deviceObj.macAddress}
+            style = {{maxLength: 10}}
+            maxLength="17"
             onChange={this.handleChange.bind(this, "macAddress")}
             onKeyUp={this.handleKeyUp.bind(this, "macAddress")}
             errorText={errors.macAddress}
