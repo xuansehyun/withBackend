@@ -99,6 +99,7 @@ export default class CollectDataStage extends Component {
   handleChange = (key, e) => {
     let value = e.target.value;
     if (key === "macAddress") {
+      value = value.toUpperCase();
       value = normalizeMacAddress( value);
       value = formatMacAddress(value);
     }
@@ -106,7 +107,7 @@ export default class CollectDataStage extends Component {
   }
 
   handleKeyUp = (key, e) => {
-    let value = e.target.value;
+    let value = e.target.value.toUpperCase();
     if (key === "macAddress") {
       this.props.onCheckAddress(key, value);
     }
@@ -120,6 +121,36 @@ export default class CollectDataStage extends Component {
   handleHome = (e) => {
     e.preventDefault();
     this.props.onHome();
+  }
+
+  renderDeviceRow() {
+    const {deviceObj, errors} = this.props;
+    const deviceItems = this.props.devices.map(it => ({text: it}));
+
+    if (deviceObj.manufacture) {
+      return (
+        <div style = {{...rowStyle, ...columnContainerStyle}}>
+          <SelectField
+            value={deviceObj.device}
+            valueMember="text"
+            onChange={this.handleChange.bind(this, "device")}
+            errorText={errors.device}
+            hintText="Select A Device"
+            menuItems={deviceItems}
+          />
+            <IconButton
+              iconClassName="material-icons"
+              tooltipPosition="top-right"
+              tooltip="Add"
+              iconStyle = {{color: "#7e7e7e"}}
+              onClick={this.props.onNewDevice}
+              >add_circle
+            </IconButton>
+        </div>
+      )
+    } else {
+    return null;
+    }
   }
 
   render () {
@@ -152,25 +183,8 @@ export default class CollectDataStage extends Component {
           </IconButton>  
         </div>
   
-        <div style = {{...rowStyle, ...columnContainerStyle}}>
-          <SelectField
-            value={deviceObj.device}
-            valueMember="text"
-            onChange={this.handleChange.bind(this, "device")}
-            errorText={errors.device}
-            hintText="Select A Device"
-            menuItems={deviceItems}
-          />
-          <IconButton
-            iconClassName="material-icons"
-            tooltipPosition="top-right"
-            tooltip="Add"
-            iconStyle = {{color: "#7e7e7e"}}
-            onClick={this.props.onNewDevice}
-            >add_circle
-          </IconButton>  
-        </div>
-      
+        {this.renderDeviceRow()}
+ 
         <div style = {{...rowStyle, ...columnContainerStyle}}>
           <TextField
             value={deviceObj.macAddress}

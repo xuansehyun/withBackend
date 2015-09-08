@@ -98,7 +98,7 @@ export default class CollectDataStageContainer extends Component {
       errors.device = "Please Select A Device!";
     }
     if (!country) {
-      errors.device = "Please Select A Country!";
+      errors.country = "Please Select A Country!";
     }
     var value = [manufacture, device, macAddress, country];
  

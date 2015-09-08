@@ -27,7 +27,7 @@ export default class HtmlDocument extends Component {
       <html>
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
+          <meta charSet="UTF-8" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
           <link rel="shortcut icon" href="/favicon.png" type="image/png"/>
           <title>Locarise</title>
