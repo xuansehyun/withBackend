@@ -53,22 +53,20 @@ function normalizeMacAddress (rawMacAddress) {
   return rawMacAddress.replace(/[-:]/g, "");  
 }
 
+var MobileDetect = require('mobile-detect');
+//var md = new MobileDetect(req.headers['user-agent']);
+var md = new MobileDetect(
+    'Mozilla/5.0 (Linux; U; Android 4.0.3; en-in; SonyEricssonMT11i' +
+    ' Build/4.1.A.0.562) AppleWebKit/534.30 (KHTML, like Gecko)' +
+    ' Version/4.0 Mobile Safari/534.30');
+var isMobile;
 const MAC_ADDRESS_REGEXP = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/;
 
-/*function checkMacAddress (macAddress) {
-  console.log("hi");
-    const errors = {};
-  console.log("hii");
-    if (!MAC_ADDRESS_REGEXP.test(macAddress)) {
-  console.log("hiii");
-        errors.macAddress = "Incorrect Mac Address format!";
-  console.log("hiiii");
-    this.setState({
-      errors,
-    }); 
-    }
-    return macAddress;
- } */
+if (!md.mobile()) {
+  isMobile = false;
+} else {
+  isMobile = true;
+}
 
 const MAC_ADDRESS_FORMATTED_SEPARATER = "-";
   
@@ -153,6 +151,55 @@ export default class CollectDataStage extends Component {
     }
   }
 
+  renderMobileManufactureRow () {
+    const {deviceObj,errors} = this.props;
+    return (
+      <div style = {{...rowStyle, ...columnContainerStyle}}>
+        <select
+          value={deviceObj.manufacture}
+          onChange={this.handleChange.bind(this, "manufacture")}
+        >
+          <option>Select A Manufacture</option>
+          {this.props.manufactures.map(it => <option key={it} value={it}>{it}</option>)}
+        </select>
+        <IconButton
+          iconClassName="material-icons"
+          tooltipPosition="top-right"
+          tooltip="Add"
+          iconStyle = {{color: "#7e7e7e"}}
+          onClick={this.props.onNewManufacture}
+          >add_circle
+        </IconButton>
+      </div>
+    );
+  }
+
+  renderDesktopManufactureRow () {
+    const manufactureItems = this.props.manufactures.map(it => ({text: it}));
+    const {deviceObj,errors} = this.props;
+    return (
+      <div style = {{...rowStyle, ...columnContainerStyle}}>
+        <SelectField
+          value={deviceObj.manufacture}
+          valueMember="text"
+          underlineFocusStyle={{borderColor: "#00afc4"}}
+          onChange={this.handleChange.bind(this, "manufacture")}
+          errorText={errors.manufacture}
+          hintText="Select A Manufacture"
+          menuItems={manufactureItems}
+        />
+        <IconButton
+          iconClassName="material-icons"
+          tooltipPosition="top-right"
+          tooltip="Add"
+          iconStyle = {{color: "#7e7e7e"}}
+          onClick={this.props.onNewManufacture}
+          >add_circle
+        </IconButton>
+      </div>
+    );
+  }
+
   render () {
     const manufactureItems = this.props.manufactures.map(it => ({text: it}));
     const deviceItems = this.props.devices.map(it => ({text: it}));
@@ -160,29 +207,14 @@ export default class CollectDataStage extends Component {
     const storeItems = this.props.stores.map(it => ({text: it}));
     const {deviceObj,errors} = this.props;
     //const {errors} = this.props;
-
+    var isM = true;
+    //if (!md.is('iPhone')) {
+    //  isM = false;
+    // }
     return (
       <div style = {rowContainerStyle}>
-        <div style = {{...rowStyle, ...columnContainerStyle}}>
-          <SelectField
-            value={deviceObj.manufacture}
-            valueMember="text"
-            underlineFocusStyle={{borderColor: "#00afc4"}}
-            onChange={this.handleChange.bind(this, "manufacture")}
-            errorText={errors.manufacture}
-            hintText="Select A Manufacture"
-            menuItems={manufactureItems}
-          />
-          <IconButton
-            iconClassName="material-icons"
-            tooltipPosition="top-right"
-            tooltip="Add"
-            iconStyle = {{color: "#7e7e7e"}}
-            onClick={this.props.onNewManufacture}
-            >add_circle
-          </IconButton>  
-        </div>
-  
+        {isM ? this.renderMobileManufactureRow() : this.renderDesktopManufactureRow()}
+   
         {this.renderDeviceRow()}
  
         <div style = {{...rowStyle, ...columnContainerStyle}}>
