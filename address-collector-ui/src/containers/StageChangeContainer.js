@@ -78,6 +78,7 @@ export default class StageChangeContainer extends Component {
       <div id="react-root">
         <AppBar
           //title="(Locarise Logo)"
+          style = {{backgroundColor: "#c0c0c0"}}
           title = {
             <img 
               style={{height: "60px"}}

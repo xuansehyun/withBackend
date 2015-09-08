@@ -7,6 +7,7 @@ import {
 import {
   RaisedButton,
   FontIcon,
+  TextField,
 } from "material-ui";
 
 const rowContainerStyle = {
@@ -33,8 +34,6 @@ const buttonStyle = {
   margin: "10px",
 };
 
-//var ReactGridLayout = require( 'react-grid-layout');
-
 export default class MainPage extends Component {
  
 //check for func 
@@ -43,16 +42,13 @@ export default class MainPage extends Component {
     onShowData: PropTypes.func.isRequired,
   } 
   render () {
-    //var layout = getOrGenerateLayout();
     return (
-      //<ReactGridLayout className="layout" 
-      //   cols={12} rowHeight={30}>
-      //  <div key={1} _grid={{x:4, y:6, w:5, h:6}}>
       <div style = {rowContainerStyle}>
         <div style = {{...rowStyle, ...columnContainerStyle}}>  
           <RaisedButton
             style={{ ...columnStyle, ...buttonStyle}}
             label="Add A New Device"
+            labelStyle={{padding: "16px 8px"}}
             primary={true}
             onClick={this.props.onAddClicked}
           >
@@ -71,8 +67,6 @@ export default class MainPage extends Component {
           />
         </div>
       </div>
-      //</div>
-      //</ReactGridLayout>
     );
   }  
 }

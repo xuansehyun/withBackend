@@ -236,12 +236,12 @@ export default class CollectDataStage extends Component {
             secondary={true} 
             label="HOME"
             labelStyle={{padding: "16px 8px"}}
-            labelColor= {"#727272"}
+            labelColor= {"#ffffff"}
             onClick={this.props.onHome}
           >
             <FontIcon 
               className="material-icons"
-              color={"#727272"}
+              color={"#ffffff"}
               style={{float: "left", lineHeight: "36px"}}
             >home
             </FontIcon>
