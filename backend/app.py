@@ -10,7 +10,7 @@ app = flask.Flask(__name__)
 app.config['DEBUG'] = os.environ.get('DEBUG', True)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
     'DATABASE_URL',
-    'sqlite:///addresses.db'
+    'sqlite:///survey.db'
 )
 
 db = flask.ext.sqlalchemy.SQLAlchemy(app)

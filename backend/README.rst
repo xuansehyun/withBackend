@@ -19,7 +19,7 @@ Optional environment variables::
     PORT         # A port number
 
 
-Restful endpoints (offers GET/POST/PATCH/DELETE/OPTIONS) ::
+Restful endpoints (offers GET/POST) ::
 
     http://127.0.0.1:8016/api/manufacturer
     http://127.0.0.1:8016/api/device
