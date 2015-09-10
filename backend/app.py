@@ -57,11 +57,14 @@ manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 # Create API endpoints, which will be available at /api/<tablename> by
 # default. Allowed HTTP methods can be specified as well.
 
-for model in [Manufacturer, Device]:
-    manager.create_api(model, methods=['GET', 'POST'])
+
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 for model in [Manufacturer, Device, MacAddress]:
     manager.create_api(model, methods=['GET', 'POST'])
 
 # start the flask loop
+app.after_request(add_cors_headers)
 app.run(port=os.environ.get('PORT', 8016))
