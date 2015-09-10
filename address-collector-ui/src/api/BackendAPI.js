@@ -1,4 +1,5 @@
 import {default as fetch} from "isomorphic-fetch";
+// http://davidwalsh.name/fetch
 
 function asJson (res) {
   return res.json();
@@ -26,12 +27,37 @@ export function brandDeviceList () {
     .then(data => {
       // https://www.filepicker.io/api/file/a387PFXRVGKtJJx9oHRQ
 
-      return data.objects.map(manufacturer => {
-        return {
-          brand: manufacturer.name,
-          devices: manufacturer.devices.map(device => device.name),
-        };
-      });
+      // return data;
+      return [
+        {
+          id: 1,
+          name: "Apple",
+          devices: [
+            {
+              id: 2,
+              name: "iPhone6"
+            },
+            {
+              id: 3,
+              name: "iPhone4s"
+            }
+          ]
+        },
+        {
+          id: 2,
+          name: "Samsung",
+          devices: [
+            {
+              id: 4,
+              name: "S3"
+            },
+            {
+              id: 5,
+              name: "S4"
+            }
+          ]
+        }
+      ]
     });
 }
 
