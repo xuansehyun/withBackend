@@ -1,3 +1,5 @@
+import {default as fetch} from "isomorphic-fetch";
+
 function asJson (res) {
   return res.json();
 }
@@ -19,13 +21,18 @@ function asJson (res) {
 const brandDevice = require("../data/brandDevice.json");
 
 export function brandDeviceList () {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: brandDevice,
+  return fetch("https://survey-db.locarise.com/api/manufacturer")
+    .then(res => res.json())
+    .then(data => {
+      // https://www.filepicker.io/api/file/a387PFXRVGKtJJx9oHRQ
+
+      return data.objects.map(manufacturer => {
+        return {
+          brand: manufacturer.name,
+          devices: manufacturer.devices.map(device => device.name),
+        };
       });
-    }, 1500 * Math.random());
-  });
+    });
 }
 
 export function StoreList () {
