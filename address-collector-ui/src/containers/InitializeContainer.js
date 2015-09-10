@@ -30,7 +30,7 @@ export default class InitializeContainer extends Component {
         devices,
       });*/
       brandDeviceList(),
-    ]).then(([{data:brandDeviceList}]) => {
+    ]).then(([brandDeviceList]) => {
       this.props.onDataLoaded(brandDeviceList);
     });
   }

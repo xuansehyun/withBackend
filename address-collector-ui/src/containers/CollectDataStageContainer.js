@@ -185,17 +185,16 @@ export default class CollectDataStageContainer extends Component {
     }
 
     const {brandDeviceList} = this.props;
-    
-    const manufactures = brandDeviceList.map(({brand}) => brand);
+
     const selectedBrand = brandDeviceList
-      .filter(({brand}) => brand === this.state.deviceObj.manufacture) [0];
+      .filter(({id}) => `${ id }` === this.state.deviceObj.manufacture) [0];
     const devices = selectedBrand ? selectedBrand.devices : [];
 
     return (
       <div>
       <CollectDataStage
         stores={this.props.stores}
-        manufactures={this.state.manufacturesOverrode.concat(manufactures)}
+        manufactures={this.state.manufacturesOverrode.concat(brandDeviceList)}
         devices={this.state.devicesOverrode.concat(devices)}
         countries={this.props.countries}
         onSubmit={this.validateAndSubmit}
