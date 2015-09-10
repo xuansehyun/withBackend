@@ -75,13 +75,16 @@ export function StoreList () {
     });
 }
 export function createDeviceObject (deviceObj) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: deviceObj,
-      });
-    }, 2000* Math.random());
-  });
+  return fetch("https://survey-db.locarise.com/api/mac_address", {
+    method: 'post',
+    body: JSON.stringify({
+      // Here we map deviceObj to our database values
+      address: deviceObj.macAddress,
+      country_code: deviceObj.country,
+      device_id: deviceObj.device,
+    })
+  })
+    .then(res => res.json());
 }
 
 export function createManufactureName (manufactureName) {
