@@ -23,3 +23,4 @@ Restful endpoints (offers GET/POST) ::
 
     http://127.0.0.1:8016/api/manufacturer
     http://127.0.0.1:8016/api/device
+    http://127.0.0.1:8016/api/mac_address

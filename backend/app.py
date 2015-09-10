@@ -32,15 +32,21 @@ class Manufacturer(db.Model):
 
 class Device(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Unicode)
+    name = db.Column(db.Unicode, unique=True)
     manufacturer_id = db.Column(db.Integer, db.ForeignKey('manufacturer.id'))
-    manufacturer = db.relationship(
-        'Manufacturer',
-        backref=db.backref('manufacturers', lazy='dynamic')
-    )
+    # manufacturer = db.relationship(
+    #     'Manufacturer',
+    #     backref=db.backref('manufacturers', lazy='dynamic')
+    # )
     created_at = db.Column(db.DateTime, server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, server_default=db.func.now(), onupdate=db.func.now())
 
+
+class MacAddress(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    address = db.Column(db.Unicode, unique=True)
+    country_code = db.Column(db.String)
+    device_id = db.Column(db.Integer, db.ForeignKey('device.id'))
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
 
 # Create the database tables.
 db.create_all()
@@ -51,8 +57,14 @@ manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 # Create API endpoints, which will be available at /api/<tablename> by
 # default. Allowed HTTP methods can be specified as well.
 
-for model in [Manufacturer, Device]:
+
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+
+for model in [Manufacturer, Device, MacAddress]:
     manager.create_api(model, methods=['GET', 'POST'])
 
 # start the flask loop
+app.after_request(add_cors_headers)
 app.run(port=os.environ.get('PORT', 8016))
