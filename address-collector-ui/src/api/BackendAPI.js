@@ -77,6 +77,10 @@ export function StoreList () {
 export function createDeviceObject (deviceObj) {
   return fetch("https://survey-db.locarise.com/api/mac_address", {
     method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify({
       // Here we map deviceObj to our database values
       address: deviceObj.macAddress,
@@ -88,22 +92,31 @@ export function createDeviceObject (deviceObj) {
 }
 
 export function createManufactureName (manufactureName) {
-
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: manufactureName,
-      });
-    }, 2000* Math.random());
-  });
+  return fetch("https://survey-db.locarise.com/api/manufacturer", {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      // Here we map deviceObj to our database values
+      name: manufactureName,
+    })
+  })
+    .then(res => res.json());
 }
-export function createDeviceName (deviceName) {
-
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: deviceName,
-      });
-    }, 2000* Math.random());
-  });
+export function createDeviceName (manufacturerId, deviceName) {
+  return fetch("https://survey-db.locarise.com/api/device", {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      // Here we map deviceObj to our database values
+      name: deviceName,
+      manufacturer_id: manufacturerId,
+    })
+  })
+    .then(res => res.json());
 }

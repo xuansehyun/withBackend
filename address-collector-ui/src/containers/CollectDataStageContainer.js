@@ -149,25 +149,25 @@ export default class CollectDataStageContainer extends Component {
     });
   }
 
-  handleManufactureCreated = (newManufactureName) => {
+  handleManufactureCreated = (newManufacture) => {
     this.setState({
       deviceObj: {
         ...this.state.deviceObj,
-        manufacture: newManufactureName,
+        manufacture: newManufacture.id,
       },
       ModalContainer: null,
-      manufacturesOverrode: [newManufactureName],
+      manufacturesOverrode: [newManufacture],
     });
   }
 
-  handleDeviceCreated = (newDeviceName) => {
+  handleDeviceCreated = (newDevice) => {
     this.setState({
       deviceObj: {
         ...this.state.deviceObj,
-        device: newDeviceName,
+        device: newDevice.id,
       },
       ModalContainer: null,
-      devicesOverrode: [newDeviceName],
+      devicesOverrode: [newDevice],
     });
   }
 
@@ -179,6 +179,7 @@ export default class CollectDataStageContainer extends Component {
         <ModalContainer
           onRequestClose={this.handleRequestClose}
           onManufactureCreated={this.handleManufactureCreated}
+          manufactureId={this.state.deviceObj.manufacture}
           onDeviceCreated={this.handleDeviceCreated}
         />
       );
