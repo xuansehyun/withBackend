@@ -76,12 +76,11 @@ export default class NewModal extends Component {
           style={{...columnStyle, ...buttonStyle}}
           secondary={true}
           label="Back"
-          labelColor= {"#727272"}
           onClick={this.props.onRequestClose}
         >
           <FontIcon
            className="material-icons"
-           color = {"#7e7e7e"}
+           color = {"#ffffff"}
            style={{float: "left", lineHeight: "36px", maxWidth: "20px" }}
           >arrow_back
           </FontIcon>

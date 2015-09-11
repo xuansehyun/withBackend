@@ -34,8 +34,6 @@ export default class CollectDataStageContainer extends Component {
  
   state = {
     deviceObj: {
-      country: window.localStorage.getItem("country"),
-      manufacture: window.localStorage.getItem("manufacture"),
     },
     errors: {
     },
@@ -58,9 +56,6 @@ export default class CollectDataStageContainer extends Component {
     if (!MAC_ADDRESS_REGEXP.test(value)) {
           errors.macAddress = "Incorrect Mac Address format!";
       }
-    else {
-      errors.macAddress = "Valid Mac Address";
-    }
     this.setState({
         errors,
     });
@@ -106,30 +101,11 @@ export default class CollectDataStageContainer extends Component {
     });
     //if no error detected, go on
     if (0 === Object.keys(errors).length) {
-      this.saveCountryToLocalStorage(country);
-      this.saveManufactureToLocalStorage (manufacture);
-      this.appendToLocalStorage();
+      //this.saveCountryToLocalStorage(country);
+      //this.saveManufactureToLocalStorage (manufacture);
+      //this.appendToLocalStorage();
       this.createDeviceToServer();
     }
-  }
-
-  readFromLocalStorage () {
-    const stringifiedList = window.localStorage.getItem(STORAGE_KEY);
-    return stringifiedList ? JSON.parse(stringifiedList) : [];
-  }
-
-  appendToLocalStorage () {
-    const currentList = this.readFromLocalStorage();
-    currentList.push(this.state.deviceObj);
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(currentList));
-  }
-
-  saveManufactureToLocalStorage (manufacture) {
-    window.localStorage.setItem("manufacture", manufacture);
-  }
-
-  saveCountryToLocalStorage (country) {
-    window.localStorage.setItem("country", country);
   }
 
   createDeviceToServer () { 

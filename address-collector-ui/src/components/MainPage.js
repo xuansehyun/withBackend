@@ -60,11 +60,6 @@ export default class MainPage extends Component {
             </FontIcon>
           </RaisedButton>
         
-          <RaisedButton
-            label="Show Data"
-            secondary={true}
-            onClick={this.props.onShowData}
-          />
         </div>
       </div>
     );

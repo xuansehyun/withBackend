@@ -31,7 +31,7 @@ export default class Root extends Component {
     });
     this.themeManager.setComponentThemes({
       raisedButton: {
-        secondaryColor: "#c0c0c0",
+        secondaryColor: "#2F4050",
         primaryColor: "#00afc4",
       },
       button: {
