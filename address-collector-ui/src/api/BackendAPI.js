@@ -25,17 +25,18 @@ function asJson (res) {
 const brandDevice = require("../data/brandDevice.json");
 
 export function manufactureList () {
-  return fetch(`${ HOST }/api/manufacturer`)
+  return fetch("https://survey-db.locarise.com/api/manufacturer")
+  //return fetch(`${ HOST }/api/manufacturer`)
     .then(res => res.json())
     .then(data => {
-      // https://www.filepicker.io/api/file/a387PFXRVGKtJJx9oHRQ
 
       return data.objects;
     });
 }
 
 export function deviceList () {
-  return fetch(`${ HOST }/api/device`)
+  return fetch("https://survey-db.locarise.com/api/device")
+  //return fetch(`${ HOST }/api/device`)
     .then(res => res.json())
     .then(data => {
       return data.objects;
@@ -56,8 +57,8 @@ export function StoreList () {
     });
 }
 export function createDeviceObject (deviceObj) {
-  //return fetch("https://survey-db.locarise.com/api/mac_address")
-  return fetch(`${ HOST }/api/mac_address`, {
+  return fetch("https://survey-db.locarise.com/api/mac_address", {
+  //return fetch(`${ HOST }/api/mac_address`, {
     method: 'post',
     headers: {
       'Accept': 'application/json',
@@ -74,8 +75,8 @@ export function createDeviceObject (deviceObj) {
 }
 
 export function createManufactureName (manufactureName) {
-  //return fetch("https://survey-db.locarise.com/api/manufacturer")
-  return fetch(`${ HOST }/api/manufacturer`, {
+  return fetch("https://survey-db.locarise.com/api/manufacturer", {
+  //return fetch(`${ HOST }/api/manufacturer`, {
     method: 'post',
     headers: {
       'Accept': 'application/json',
@@ -89,8 +90,8 @@ export function createManufactureName (manufactureName) {
     .then(res => res.json());
 }
 export function createDeviceName (manufacturerId, deviceName) {
-  //return fetch("https://survey-db.locarise.com/api/device")
-  return fetch(`${ HOST }/api/device`, {
+  return fetch("https://survey-db.locarise.com/api/device", {
+  //return fetch(`${ HOST }/api/device`, {
     method: 'post',
     headers: {
       'Accept': 'application/json',

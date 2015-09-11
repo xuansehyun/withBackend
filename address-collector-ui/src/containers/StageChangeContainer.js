@@ -68,7 +68,7 @@ export default class StageChangeContainer extends Component {
     console.log("Created!", deviceObjFromServer);
 
     this.setState({
-      stage: 1,
+      stage: 0,
     });
   }  
   render () {
