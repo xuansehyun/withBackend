@@ -74,6 +74,22 @@ export default class StageChangeContainer extends Component {
   render () {
     const Component = containerByStage[this.state.stage] || InitializeContainer;
 
+    const contentStyle = {
+      minHeight: "300px",
+      margin: "30px 0",
+    }
+
+    const footerStyle = {
+      padding: "40px 20px",
+      backgroundColor: "#212121",
+      color: "#ffffff",
+      textAlign: "center",
+    }
+
+    const linkStyle = {
+      color: "#ffffff",
+    }
+
     return (
       <div id="react-root">
         <AppBar
@@ -87,17 +103,22 @@ export default class StageChangeContainer extends Component {
           }
           showMenuIconButton = {false}
         />
-        <div style={{ height: "20px"}} />
-        <Component
-          onDataLoaded={this.handleDataLoaded}
-          onAddClicked={this.handleAddClicked}
-          manufactures={this.state.manufactures}
-          countries={COUNTRY_LIST}
-          stores={STORE_LIST}
-          devices={this.state.devices}
-          onDeviceCreated={this.handleDeviceCreated}
-          onHome={this.handleHome}
-        />
+        <div style={contentStyle}>
+          <Component
+            onDataLoaded={this.handleDataLoaded}
+            onAddClicked={this.handleAddClicked}
+            manufactures={this.state.manufactures}
+            countries={COUNTRY_LIST}
+            stores={STORE_LIST}
+            devices={this.state.devices}
+            onDeviceCreated={this.handleDeviceCreated}
+            onHome={this.handleHome}
+          />
+        </div>
+        <div style={footerStyle}>
+          <p>© 2012-2015 Locarise, Pte Ltd. All rights reserved.</p>
+          <a href="https://www.google.com" target="_blank" style={linkStyle}>A</a>
+        </div>
       </div>
     );
   }
