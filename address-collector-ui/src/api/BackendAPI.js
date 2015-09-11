@@ -24,7 +24,7 @@ function asJson (res) {
 
 const brandDevice = require("../data/brandDevice.json");
 
-export function brandDeviceList () {
+export function manufactureList () {
   return fetch(`${ HOST }/api/manufacturer`)
     .then(res => res.json())
     .then(data => {
@@ -61,6 +61,14 @@ export function brandDeviceList () {
     //       ]
     //     }
     //   ]
+    });
+}
+
+export function deviceList () {
+  return fetch(`${ HOST }/api/device`)
+    .then(res => res.json())
+    .then(data => {
+      return data.objects;
     });
 }
 

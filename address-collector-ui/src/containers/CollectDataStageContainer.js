@@ -20,10 +20,9 @@ const STORAGE_KEY = "myDeviceList";
 export default class CollectDataStageContainer extends Component {
 
   static propTypes = {
-    //manufactures: PropTypes.array.isRequired,
-    //devices: PropTypes.array.isRequired,
+    manufactures: PropTypes.array.isRequired,
+    devices: PropTypes.array.isRequired,
     stores: PropTypes.array.isRequired,
-    brandDeviceList: PropTypes.array.isRequired,
     countries: PropTypes.array.isRequired,
     onDeviceCreated: PropTypes.func.isRequired,
     onHome: PropTypes.func.isRequired,
@@ -185,17 +184,15 @@ export default class CollectDataStageContainer extends Component {
       );
     }
 
-    const {brandDeviceList} = this.props;
-
-    const selectedBrand = brandDeviceList
-      .filter(({id}) => `${ id }` === this.state.deviceObj.manufacture) [0];
-    const devices = selectedBrand && selectedBrand.devices || [];
+    const devices = this.props.devices.filter(({manufacturer_id}) => {
+      return `${ manufacturer_id }` === this.state.deviceObj.manufacture;
+    });
 
     return (
       <div>
       <CollectDataStage
         stores={this.props.stores}
-        manufactures={this.state.manufacturesOverrode.concat(brandDeviceList)}
+        manufactures={this.state.manufacturesOverrode.concat(this.props.manufactures)}
         devices={this.state.devicesOverrode.concat(devices)}
         countries={this.props.countries}
         onSubmit={this.validateAndSubmit}

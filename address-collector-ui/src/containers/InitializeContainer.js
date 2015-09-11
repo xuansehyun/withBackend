@@ -5,7 +5,8 @@ import {
 } from "react";
 
 import {
-  brandDeviceList,
+  manufactureList,
+  deviceList,
 } from "../api/BackendAPI";
 
 import {default as InitializeStage} from "../components/InitializeStage";
@@ -22,16 +23,13 @@ export default class InitializeContainer extends Component {
 //After loading data, call setState to go to page1
   componentDidMount () {
     Promise.all([
-     /* manufactureList(),
+      manufactureList(),
       deviceList(),
-    ]).then(([{data: manufactures}, {data: devices}]) => {
+    ]).then(([manufactures, devices]) => {
       this.props.onDataLoaded({
         manufactures,
         devices,
-      });*/
-      brandDeviceList(),
-    ]).then(([brandDeviceList]) => {
-      this.props.onDataLoaded(brandDeviceList);
+      });
     });
   }
 
