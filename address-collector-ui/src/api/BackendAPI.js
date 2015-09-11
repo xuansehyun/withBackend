@@ -1,6 +1,9 @@
 import {default as fetch} from "isomorphic-fetch";
 // http://davidwalsh.name/fetch
 
+// const HOST = "https://survey-db.locarise.com";
+const HOST = "http://127.0.0.1:8016";
+
 function asJson (res) {
   return res.json();
 }
@@ -22,42 +25,42 @@ function asJson (res) {
 const brandDevice = require("../data/brandDevice.json");
 
 export function brandDeviceList () {
-  return fetch("https://survey-db.locarise.com/api/manufacturer")
+  return fetch(`${ HOST }/api/manufacturer`)
     .then(res => res.json())
     .then(data => {
       // https://www.filepicker.io/api/file/a387PFXRVGKtJJx9oHRQ
 
-      // return data;
-      return [
-        {
-          id: 1,
-          name: "Apple",
-          devices: [
-            {
-              id: 2,
-              name: "iPhone6"
-            },
-            {
-              id: 3,
-              name: "iPhone4s"
-            }
-          ]
-        },
-        {
-          id: 2,
-          name: "Samsung",
-          devices: [
-            {
-              id: 4,
-              name: "S3"
-            },
-            {
-              id: 5,
-              name: "S4"
-            }
-          ]
-        }
-      ]
+      return data.objects;
+    //   return [
+    //     {
+    //       id: 1,
+    //       name: "Apple",
+    //       devices: [
+    //         {
+    //           id: 2,
+    //           name: "iPhone6"
+    //         },
+    //         {
+    //           id: 3,
+    //           name: "iPhone4s"
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       id: 2,
+    //       name: "Samsung",
+    //       devices: [
+    //         {
+    //           id: 4,
+    //           name: "S3"
+    //         },
+    //         {
+    //           id: 5,
+    //           name: "S4"
+    //         }
+    //       ]
+    //     }
+    //   ]
     });
 }
 
@@ -75,7 +78,7 @@ export function StoreList () {
     });
 }
 export function createDeviceObject (deviceObj) {
-  return fetch("https://survey-db.locarise.com/api/mac_address", {
+  return fetch(`${ HOST }/api/mac_address`, {
     method: 'post',
     headers: {
       'Accept': 'application/json',
@@ -92,7 +95,7 @@ export function createDeviceObject (deviceObj) {
 }
 
 export function createManufactureName (manufactureName) {
-  return fetch("https://survey-db.locarise.com/api/manufacturer", {
+  return fetch(`${ HOST }/api/manufacturer`, {
     method: 'post',
     headers: {
       'Accept': 'application/json',
@@ -106,7 +109,7 @@ export function createManufactureName (manufactureName) {
     .then(res => res.json());
 }
 export function createDeviceName (manufacturerId, deviceName) {
-  return fetch("https://survey-db.locarise.com/api/device", {
+  return fetch(`${ HOST }/api/device`, {
     method: 'post',
     headers: {
       'Accept': 'application/json',

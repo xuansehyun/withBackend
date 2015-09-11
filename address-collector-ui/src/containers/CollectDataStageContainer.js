@@ -189,7 +189,7 @@ export default class CollectDataStageContainer extends Component {
 
     const selectedBrand = brandDeviceList
       .filter(({id}) => `${ id }` === this.state.deviceObj.manufacture) [0];
-    const devices = selectedBrand ? selectedBrand.devices : [];
+    const devices = selectedBrand && selectedBrand.devices || [];
 
     return (
       <div>
