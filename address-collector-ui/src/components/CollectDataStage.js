@@ -123,7 +123,6 @@ export default class CollectDataStage extends Component {
 
   renderMobileDeviceRow() {
     const {deviceObj, errors} = this.props;
-    const deviceItems = this.props.devices.map(it => ({text: it}));
 
     if (deviceObj.manufacture) {
       return (
@@ -134,7 +133,7 @@ export default class CollectDataStage extends Component {
           style ={{width: '255px'}}
         >
           <option>Select A Device</option>
-          {this.props.devices.map(it => <option key={it} value={it}>{it}</option>)}
+          {this.props.devices.map(it => <option key={it.id} value={it.id}>{it.name}</option>)}
         </select>
         <IconButton
           iconClassName="material-icons"
@@ -153,14 +152,14 @@ export default class CollectDataStage extends Component {
 
   renderDesktopDeviceRow() {
     const {deviceObj, errors} = this.props;
-    const deviceItems = this.props.devices.map(it => ({text: it}));
+    const deviceItems = this.props.devices.map(it => ({id: it.id,text: it.name}));
 
     if (deviceObj.manufacture) {
       return (
         <div style = {{...rowStyle, ...columnContainerStyle}}>
           <SelectField
             value={deviceObj.device}
-            valueMember="text"
+            valueMember="id"
             onChange={this.handleChange.bind(this, "device")}
             style ={{width: '255px'}}
             errorText={errors.device}
@@ -192,7 +191,7 @@ export default class CollectDataStage extends Component {
           style ={{width: '255px'}}
         >
           <option>Select A Manufacture</option>
-          {this.props.manufactures.map(it => <option key={it} value={it}>{it}</option>)}
+          {this.props.manufactures.map(it => <option key={it.id} value={it.id}>{it.name}</option>)}
         </select>
         <IconButton
           iconClassName="material-icons"
@@ -207,13 +206,13 @@ export default class CollectDataStage extends Component {
   }
 
   renderDesktopManufactureRow () {
-    const manufactureItems = this.props.manufactures.map(it => ({text: it}));
+    const manufactureItems = this.props.manufactures.map(it => ({id: it.id, text: it.name}));
     const {deviceObj,errors} = this.props;
     return (
       <div style = {{...rowStyle, ...columnContainerStyle}}>
         <SelectField
           value={deviceObj.manufacture}
-          valueMember="text"
+          valueMember="id"
           underlineFocusStyle={{borderColor: "#00afc4"}}
           onChange={this.handleChange.bind(this, "manufacture")}
           errorText={errors.manufacture}
@@ -268,8 +267,6 @@ export default class CollectDataStage extends Component {
   }
 
   render () {
-    const manufactureItems = this.props.manufactures.map(it => ({text: it}));
-    const deviceItems = this.props.devices.map(it => ({text: it}));
     const countryItems = this.props.countries.map(it => ({text: it}));
     const storeItems = this.props.stores.map(it => ({text: it}));
     const {deviceObj,errors} = this.props;

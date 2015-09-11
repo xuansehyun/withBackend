@@ -22,8 +22,8 @@ export default class NewManufactureModalContainer extends Component {
   }
 
   handleSubmit = (newManufactureName) => {
-    createManufactureName(newManufactureName).then(({data: newManufactureNameFromServer}) => {
-      this.props.onManufactureCreated(newManufactureNameFromServer);
+    createManufactureName(newManufactureName).then((data) => {
+      this.props.onManufactureCreated(data);
     });
   }
 

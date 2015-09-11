@@ -40,15 +40,15 @@ export default class StageChangeContainer extends Component {
 
   state = {
     stage: 0,
-    /*manufactures: null,
-    devices: null,*/
-    brandDeviceList: null,
+    manufactures: null,
+    devices: null,
   }
  
-  handleDataLoaded = (brandDeviceList) => {
+  handleDataLoaded = ({manufactures,devices}) => {
     this.setState({
         stage: 1, 
-        brandDeviceList,
+        manufactures,
+        devices,
     });
   }
 
@@ -91,11 +91,10 @@ export default class StageChangeContainer extends Component {
         <Component
           onDataLoaded={this.handleDataLoaded}
           onAddClicked={this.handleAddClicked}
-          //manufactures={this.state.manufactures}
+          manufactures={this.state.manufactures}
           countries={COUNTRY_LIST}
           stores={STORE_LIST}
-          //devices={this.state.devices}
-          brandDeviceList={this.state.brandDeviceList}
+          devices={this.state.devices}
           onDeviceCreated={this.handleDeviceCreated}
           onHome={this.handleHome}
         />

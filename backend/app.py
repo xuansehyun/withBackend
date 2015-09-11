@@ -2,11 +2,13 @@
 import os
 
 import flask
+from flask.ext.cors import CORS
 import flask.ext.sqlalchemy
 import flask.ext.restless
 
 # Create the Flask application and the Flask-SQLAlchemy object.
 app = flask.Flask(__name__)
+CORS(app)
 app.config['DEBUG'] = os.environ.get('DEBUG', True)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
     'DATABASE_URL',
@@ -60,11 +62,12 @@ manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = response.request.headers['Access-Control-Request-Headers']
     return response
 
 for model in [Manufacturer, Device, MacAddress]:
     manager.create_api(model, methods=['GET', 'POST'])
 
 # start the flask loop
-app.after_request(add_cors_headers)
+# app.after_request(add_cors_headers)
 app.run(port=os.environ.get('PORT', 8016))

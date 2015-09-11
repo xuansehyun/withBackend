@@ -1,3 +1,4 @@
 flask
+flask-cors
 flask_restless==0.17.0
 Flask-SQLAlchemy

@@ -14,6 +14,7 @@ export default class NewDeviceModalContainer extends Component {
 
   static propTypes = {
     onRequestClose: PropTypes.func.isRequired,
+    manufactureId: PropTypes.string.isRequired,
     onDeviceCreated: PropTypes.func.isRequired,
   }
 
@@ -22,8 +23,8 @@ export default class NewDeviceModalContainer extends Component {
   }
 
   handleSubmit = (newDeviceName) => {
-    createDeviceName(newDeviceName).then(({data: newDeviceNameFromServer}) => {
-      this.props.onDeviceCreated(newDeviceNameFromServer);
+    createDeviceName(this.props.manufactureId, newDeviceName).then((data) => {
+      this.props.onDeviceCreated(data);
     });
   }
 

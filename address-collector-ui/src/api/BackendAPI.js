@@ -1,3 +1,9 @@
+import {default as fetch} from "isomorphic-fetch";
+// http://davidwalsh.name/fetch
+
+// const HOST = "https://survey-db.locarise.com";
+const HOST = "http://127.0.0.1:8016";
+
 function asJson (res) {
   return res.json();
 }
@@ -18,14 +24,52 @@ function asJson (res) {
 
 const brandDevice = require("../data/brandDevice.json");
 
-export function brandDeviceList () {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: brandDevice,
-      });
-    }, 1500 * Math.random());
-  });
+export function manufactureList () {
+  return fetch(`${ HOST }/api/manufacturer`)
+    .then(res => res.json())
+    .then(data => {
+      // https://www.filepicker.io/api/file/a387PFXRVGKtJJx9oHRQ
+
+      return data.objects;
+    //   return [
+    //     {
+    //       id: 1,
+    //       name: "Apple",
+    //       devices: [
+    //         {
+    //           id: 2,
+    //           name: "iPhone6"
+    //         },
+    //         {
+    //           id: 3,
+    //           name: "iPhone4s"
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       id: 2,
+    //       name: "Samsung",
+    //       devices: [
+    //         {
+    //           id: 4,
+    //           name: "S3"
+    //         },
+    //         {
+    //           id: 5,
+    //           name: "S4"
+    //         }
+    //       ]
+    //     }
+    //   ]
+    });
+}
+
+export function deviceList () {
+  return fetch(`${ HOST }/api/device`)
+    .then(res => res.json())
+    .then(data => {
+      return data.objects;
+    });
 }
 
 export function StoreList () {
@@ -42,32 +86,48 @@ export function StoreList () {
     });
 }
 export function createDeviceObject (deviceObj) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: deviceObj,
-      });
-    }, 2000* Math.random());
-  });
+  return fetch(`${ HOST }/api/mac_address`, {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      // Here we map deviceObj to our database values
+      address: deviceObj.macAddress,
+      country_code: deviceObj.country,
+      device_id: deviceObj.device,
+    })
+  })
+    .then(res => res.json());
 }
 
 export function createManufactureName (manufactureName) {
-
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: manufactureName,
-      });
-    }, 2000* Math.random());
-  });
+  return fetch(`${ HOST }/api/manufacturer`, {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      // Here we map deviceObj to our database values
+      name: manufactureName,
+    })
+  })
+    .then(res => res.json());
 }
-export function createDeviceName (deviceName) {
-
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: deviceName,
-      });
-    }, 2000* Math.random());
-  });
+export function createDeviceName (manufacturerId, deviceName) {
+  return fetch(`${ HOST }/api/device`, {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      // Here we map deviceObj to our database values
+      name: deviceName,
+      manufacturer_id: manufacturerId,
+    })
+  })
+    .then(res => res.json());
 }
