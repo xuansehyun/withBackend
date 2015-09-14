@@ -15,6 +15,8 @@ const rowContainerStyle = {
   display: "flex",
   flexFlow: "column nowrap",
   alignContent: "center",
+  paddingTop: 10,
+  paddingBottom: 10,
 };
 
 const rowStyle = {
