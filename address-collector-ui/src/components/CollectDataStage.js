@@ -309,7 +309,7 @@ export default class CollectDataStage extends Component {
 
         {isM ? this.renderMobileCountryRow() : this.renderDesktopCountryRow()} 
  
-        <div style = {{...rowStyle, ...columnContainerStyle}}>
+        <div style = {{...rowStyle, ...columnContainerStyle, paddingTop: 10}}>
           <RaisedButton 
             style={{ ...columnStyle, ...buttonStyle}}
             secondary={true} 
