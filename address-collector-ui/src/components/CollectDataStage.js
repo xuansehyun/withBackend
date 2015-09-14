@@ -92,6 +92,10 @@ export default class CollectDataStage extends Component {
       value = normalizeMacAddress( value);
       value = formatMacAddress(value);
     }
+    if (key === "manufacture" || key === "device") {
+      // Because "value" from native select element is "string"
+      value = parseInt(value, 10);
+    }
     this.props.onDeviceKeyValueChange(key, value);
   }
 

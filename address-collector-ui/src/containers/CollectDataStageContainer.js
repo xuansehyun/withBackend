@@ -161,7 +161,7 @@ export default class CollectDataStageContainer extends Component {
     }
 
     const devices = this.props.devices.filter(({manufacturer_id}) => {
-      return `${ manufacturer_id }` === this.state.deviceObj.manufacture;
+      return manufacturer_id === this.state.deviceObj.manufacture;
     });
 
     return (
