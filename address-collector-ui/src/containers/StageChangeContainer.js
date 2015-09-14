@@ -12,6 +12,8 @@ import {
   AppBar,
 } from "material-ui";
 
+import {default as ReactModal} from "react-modal";
+
 import {default as InitializeContainer} from "./InitializeContainer";
 import {default as MainPageContainer} from "./MainPageContainer";
 import {default as CollectDataStageContainer} from "./CollectDataStageContainer";
@@ -42,6 +44,7 @@ export default class StageChangeContainer extends Component {
     stage: 0,
     manufactures: null,
     devices: null,
+    isModalOpen: false,
   }
  
   handleDataLoaded = ({manufactures,devices}) => {
@@ -70,7 +73,14 @@ export default class StageChangeContainer extends Component {
     this.setState({
       stage: 0,
     });
-  }  
+  }
+
+  handleRequestClose = () => {
+    this.setState({
+      isModalOpen: false,
+    });
+  }
+
   render () {
     const Component = containerByStage[this.state.stage] || InitializeContainer;
 
@@ -119,8 +129,14 @@ export default class StageChangeContainer extends Component {
         </div>
         <div style={footerStyle}>
           <p>© 2012-2015 Locarise, Pte Ltd. All rights reserved.</p>
-          <a href="https://www.google.com" target="_blank" style={linkStyle}>A</a>
+          <a onClick={() => this.setState({ isModalOpen: true })} style={linkStyle}>A</a>
         </div>
+        <ReactModal
+          isOpen={this.state.isModalOpen}
+          onRequestClose={this.handleRequestClose}
+        >
+          Please put the content here!
+        </ReactModal>
       </div>
     );
   }
