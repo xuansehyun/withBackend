@@ -285,7 +285,7 @@ export default class CollectDataStage extends Component {
    
         {isM ? this.renderMobileDeviceRow() : this.renderDesktopDeviceRow()}
  
-        <div style = {{...rowStyle, ...columnContainerStyle}}>
+        <div style = {{...rowStyle, ...columnContainerStyle, marginTop: -16}}>
           <TextField
             value={deviceObj.macAddress}
             style = {{maxLength: 10}}
